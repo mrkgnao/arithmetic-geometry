@@ -6,6 +6,7 @@
 \newtheorem{lemma}[theorem]{Proof}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -33,8 +34,8 @@
 
 \newcommand{\oms}[0]{\Omega^\ast}
 
-\newcommand{\dx}[1]{\mathrm{d}x^{#1}}
-\newcommand{\fdx}[1]{{f}_{#1}\;\mathrm{d}x^{#1}}
+\newcommand{\dx}[1]{\mathnormal{d}x^{#1}}
+\newcommand{\fdx}[1]{{f}_{#1}\;\mathnormal{d}x^{#1}}
 
 \newcommand{\dxi}[0]{\dx i}
 \newcommand{\dxj}[0]{\dx j}
@@ -45,12 +46,29 @@
 \newcommand{\mdr}{{{\sf{Mod}}_R}}
 \newcommand{\mdg}[1]{{{\sf{Mod}}_{#1}}}
 
-\newcommand{\trm}{{\mathrm Tr}_{L|K}}
-\newcommand{\tr}[1]{{\mathrm Tr}_{L|K}(#1)}
+% \makeatletter
+% \DeclareSymbolFont{sfoperators}{\operator@encoding}{\rmdefault}{m}{n}
+% \DeclareSymbolFontAlphabet{\mathnormal}{sfoperators}
+% \def\operator@font{\mathgroup\symsfoperators}
+% \makeatother
 
-\DeclareMathOperator{\Tr}{tr}
+\newcommand{\Tr}[1]{{\mathnormal{Tr}}_{L|K}(#1)}
+\newcommand{\Trg}[2]{{\mathnormal{Tr}}_{#1}({#2})}
 
-\newcommand{\nmm}{{\mathrm Nm}_{L|K}}
-\newcommand{\nm}[1]{{\mathrm Nm}_{L|K}(#1)}
+\newcommand{\Trm}[0]{{\mathnormal{Tr}}_{L|K}}
+\newcommand{\Trmg}[1]{{\mathnormal{Tr}}_{#1}}
+
+\DeclareMathOperator{\tr}{{\mathnormal{tr}}}
+
+\let\det\relax
+\DeclareMathOperator{\det}{{\mathnormal{det}}}
+
+\DeclareMathOperator{\id}{{\mathnormal{id}}}
+
+\newcommand{\Nm}[1]{{\mathnormal{Nm}}_{L|K}(#1)}
+\newcommand{\Nmg}[2]{{\mathnormal{Nm}}_{#1}({#2})}
+
+\newcommand{\Nmm}[0]{{\mathnormal{Nm}}_{L|K}}
+\newcommand{\Nmmg}[1]{{\mathnormal{Nm}}_{#1}}
 
 \setlength\parindent{0pt}

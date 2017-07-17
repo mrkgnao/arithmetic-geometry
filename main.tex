@@ -20,11 +20,17 @@
 
 \input{generated-preamble.tex}
 
-% \newcommand{\mr}[1][]{\br^{\ifthenelse{\isempty{#1}}{n}{#1}}}
-
 \input{custom-preamble.tex}
 
+\title{Arithmetic geometry notes}
+\author{Soham Chowdhury}
+
 \begin{document}
+
+\maketitle
+\frontmatter
+\tableofcontents*
+\mainmatter
 
 \chapter{Algebraic integers}
 
@@ -44,7 +50,7 @@ extension, and $B$ the integral closure of $A$ in $L$. This is the \emph{$AKLB$
 Integrality is stable under the ring operations: one would like the following to
 hold, and they do:
 
-This is a corollary
+This is a corollary of the following:
 
 \begin{theorem}[Module-theoretic characterization of integrality]{\label{module-integrality}}
   A finite number of $b_i$ are integral over $A$ $\iff$ the ring $A[b_1,\ldots,b_n]$ is
@@ -63,7 +69,7 @@ This is a corollary
   $A \subseteq B$ integral and $B \subseteq C$ integral $\iff$ $A \subseteq C$ integral.
 \end{theorem}
 \begin{proof}
-  TODO.
+  $A \subseteq C$ integral implies $A \subseteq B$ integral. (Why?)
 \end{proof}
 
 \begin{theorem}
@@ -115,11 +121,49 @@ of the $K$-vector space $L$. We define the trace and norm maps
 
 \noindent
 \begin{align*}
-\tr z &= \Tr T_z\\
-\nm z &= \det T_z
+  \Tr z &= \tr T_z\\
+  \Nm z &= \det T_z
 \end{align*}
-\begin{theorem}
-  adsf in \Cref{integrality-of-sums-products} k
+
+Let $n = [L : K]$. The characteristic polynomial
+
+\noindent
+\begin{align*}
+  \chi_z(t) &= \det (tI - T_z)\\
+            &= t^n - a_1t^{n-1} + \cdots + (-1)^n a_n \in K[i]
+\end{align*}
+
+contains coefficients $a_1 = \Tr z$ and $a_n = \Nm z$.
+
+\begin{remark}
+  If this isn't immediately clear, think Viet\`a. (This will be one of the
+  recurring themes throughout this chapter.)
+\end{remark}
+
+\section{Galois-theoretic interpretations}
+
+Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
+
+\begin{prop}
+  If $L|K$ is separable, letting $\sigma : L \to \bar{K}$ vary over the
+  $K$-embeddings of $L$ into $\bar{K}$, we have
+  \begin{enumerate}
+  \item \label{chi-z-product-exp} $\chi_z(t) = \prod_\sigma (t - \sigma z)$
+  \item $\Tr z = \sum_\sigma \sigma z$
+  \item $\Nm z = \prod_\sigma \sigma z$
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  Part \ref{chi-z-product-exp}
+\end{proof}
+
+\begin{theorem}{\label{mul-trace-norm}}
+  Consider finite field extensions $K \subseteq L \subseteq M$. We have
+  \begin{alignat*}{2}
+    \Trmg{L|K} &\circ \Trmg {M|L} &&= \Trmg{M|K}\\
+    \Nmmg{L|K} &\circ \Nmmg {M|L} &&= \Nmmg{M|K}
+  \end{alignat*}
 \end{theorem}
 
 \end{document}
