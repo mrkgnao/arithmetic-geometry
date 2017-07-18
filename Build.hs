@@ -33,7 +33,7 @@ rules = do
     -- need os
     -- cmd "gcc -o" [out] os
     putNormal "First pdflatex pass"
-    tex <- getDirectoryFiles "" ["*.tex"]
+    tex <- getDirectoryFiles "" ["//*.tex"]
     need tex
     cmd_ "pdflatex -synctex=1 -draftmode -interaction=batchmode main.tex"
     cmd_ "pdflatex -synctex=1 -interaction=batchmode main.tex"
