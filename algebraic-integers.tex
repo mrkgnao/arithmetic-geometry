@@ -1,0 +1,193 @@
+\chapter{Algebraic integers}
+
+\epigraph{Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue
+  ornare nulla, non luctus diam neque sit amet urna.}{The Dude} 
+
+Fix a domain $A$ integrally closed in $K := K(A)$. Let $L|K$ be a finite
+extension, and $B$ the integral closure of $A$ in $L$. This is the \emph{$AKLB$
+  diagram}:
+
+\[
+  \begin{tikzcd}
+    K \arrow[r, hook] & L \\
+    A \arrow[u] \arrow[r] & B \arrow[u]
+  \end{tikzcd}
+\]
+
+\section{Properties of integrality}
+
+Integrality is stable under the ring operations: one would like the following to
+hold, and they do:
+
+This is a corollary of the following:
+
+\begin{theorem}[Module-theoretic characterization of integrality]{\label{module-integrality}}
+  A finite number of $b_i$ are integral over $A$ $\iff$ the ring $A[b_1,\ldots,b_n]$ is
+  finitely generated as an $A$-module.
+\end{theorem}
+\begin{proof}
+  TODO.
+\end{proof}
+
+\begin{corollary}{\label{integrality-of-sums-products}}
+  If $a$ and $b$ are integral over $A$, so are $a + b$ and $ab$.
+\end{corollary}
+
+\begin{theorem}[Integrality is transitive]{\label{integrality-trans}}
+  Consider ring extensions $A \subseteq B \subseteq C$.
+  $A \subseteq B$ integral and $B \subseteq C$ integral $\iff$ $A \subseteq C$ integral.
+\end{theorem}
+\begin{proof}
+  $A \subseteq C$ integral implies $A \subseteq B$ integral. (Why?)
+\end{proof}
+
+\begin{theorem}
+  Any element $l \in L$ is equal to $b/a$ for $b \in B$ and $a \in A$.
+\end{theorem}
+
+\begin{proof}
+  Consider an element $l \in L$. The minimal polynomial $m_l$ of $l$ over $K$
+  gives rise to a polynomial over $A$
+  \[ a_nl^n + a_{n-1}l^{n-1} + \cdots + a_0 = 0 \] by clearing denominators. Now
+  observe that $\ell := a_nl$ is integral over $A$: multiplying by $a_n^{n-1}$
+  gives an equation of the form
+  \[ \ell^n + a_{n-1}'\ell^{n-1} + \cdots + a_0' = 0. \] This shows that taking
+  $b/a$ = $\ell/a_n$ works.
+\end{proof}
+
+\begin{remark}
+  Notice that $K(B) = L$. Indeed, $B \subset L$ so $K(B) \subset L$, and the
+  result above shows that $L \subset K(B)$ (set-theoretically, $L \subset B
+  \times A \subset B \times B$).
+\end{remark}
+
+\begin{theorem}
+  $l \in L$ is integral over $A$ iff its minimal polynomial $\mu_l$ over $K$ has
+  coefficients in $A$.
+\end{theorem}
+
+\begin{proof}
+  If $\mu := \mu_l \in A[x]$ then we have integrality of $l$ over $A$ by
+  definition. Consider now the case of an integral $l$ with minimal polynomial
+  $\mu \in K[x]$. From integrality over $A$ we know that $l$ is a root of some
+  $g \in A[x]$. Then $\mu | g$ in $K[x]$, so all zeros of $\mu$ are zeros of $g$
+  and hence integral over $A$.
+
+  \npar By Viet\`a, the coefficients $a_i$ are given by elementary symmetric
+  polynomials in the roots and are hence, by
+  \Cref{integrality-of-sums-products}, integral over $A$ themselves. The $a_i$
+  are elements of $K$, so, in this case, integrality over $A$ means that $a_i
+  \in K$, and hence $\mu \in A[x]$.
+\end{proof}
+
+\section{The trace and the norm}
+
+Given $x \in L$, multiplication by $x$ determines an endomorphism
+\[ T_x : \alpha \mapsto x\alpha \] of the $K$-vector space $L$. We define the
+trace and norm maps
+\begin{align*}
+  \Tr z &= \tr T_z\\
+  \Nm z &= \det T_z
+\end{align*}
+
+Let $n = [L : K]$. The characteristic polynomial
+\begin{align*}
+  \chi_z(t) &= \det (tI - T_z)\\
+            &= t^n - a_1t^{n-1} + \cdots + (-1)^n a_n \in K[i]
+\end{align*}
+
+contains coefficients $a_1 = \Tr z$ and $a_n = \Nm z$.
+
+\begin{remark}
+  If this isn't immediately clear, think Viet\`a. (This will be one of the
+  recurring themes throughout this chapter.)
+\end{remark}
+
+\section{Galois-theoretic interpretations}
+
+Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
+
+\begin{prop}
+  If $L|K$ is separable, letting $\sigma : L \to \bar{K}$ vary over the
+  $K$-embeddings of $L$ into $\bar{K}$, we have
+  \begin{enumerate}
+  \item \label{chi-z-product-exp} $\chi_z(t) = \prod_\sigma (t - \sigma z)$
+  \item $\Tr z = \sum_\sigma \sigma z$
+  \item $\Nm z = \prod_\sigma \sigma z$
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  Let $d=[L:K(x)]$. The characteristic polynomial is a power
+  \[\chi_z = \mu_z^d \]
+  where $d=[L:K(z)]$. Part \ref{chi-z-product-exp} easily implies the others, by
+  Viet\`a's formulas.
+\end{proof}
+
+\begin{theorem}{\label{mul-trace-norm}}
+  For a tower of finite extensions $K \subseteq L \subseteq M$, we have
+  \begin{alignat*}{2}
+    \Trmg{L|K} &\circ \Trmg {M|L} &&= \Trmg{M|K}\\
+    \Nmmg{L|K} &\circ \Nmmg {M|L} &&= \Nmmg{M|K}
+  \end{alignat*}
+\end{theorem}
+
+\section{Integral bases}
+
+\begin{definition}
+  The \emph{\textbf{discriminant}} of a basis $\alpha_i$ of a separable
+  extension $L | K$ is defined by
+  \[ d(\alpha_1,\ldots,\alpha_n) = \det((\sigma_i\alpha_j))^2 \] where the
+  $\sigma_i$ are the $K$-embeddings $L \hookrightarrow {\bar{K}}$.
+\end{definition}
+
+
+\begin{prop}{\label{trace-form-bilinear}}
+  For $L|K$ a separable extension with basis $\alpha_i$, the function
+  \[(x,y) = \Tr{xy}\] yields a nondegenerate bilinear form on the $K$-vector
+  space $L$.
+\end{prop}
+
+\begin{corollary} For $L|K$ and $\alpha_i$ as above,
+  \[d(\alpha_1,\ldots,\alpha_n) \neq 0.\]
+\end{corollary}
+
+\begin{proof}
+  The form has matrix
+  \[ M = \Tr {(\alpha_i\alpha_j)} \] with respect to the given basis. The
+  nondegeneracy of the form, which we have from \Cref{trace-form-bilinear}, is
+  equivalent to the statement that $\det M \ne 0$, whence the claim follows.
+\end{proof}
+
+\begin{lemma}
+  Let $(\alpha_i)$ be a basis of $L|K$ contained in $B$, with $d =
+  d(\alpha_1,\ldots,\alpha_n)$. Then
+  \[ dB \subseteq A\alpha_1 + \cdots + A\alpha_n. \]
+\end{lemma}
+
+\begin{prop}
+  If $L|K$ is separable and $A$ is a PID, every finitely generated $B$-submodule
+  $M\ne 0$ of $L$ s a free $A$-module of rank $[L:K]$.
+\end{prop}
+\begin{corollary}
+  $B$ admits an integral basis over $A$.
+\end{corollary}
+
+\begin{prop}
+  Let $M|K$ and $N|K$ be two Galois extensions with $M \cap N = K$, with $m =
+  [M:K]$ and $n = [N:K]$. Fix integral bases $(\alpha_i)_{1 \le i \le m}$ of
+  $M|K$ and $(\beta_j)_{1 \le j \le n}$ of $N|K$ respectively, with
+  discriminants $\mu$ and $\nu$ respectively. If $\mu$ and $\nu$ are relatively
+  prime, with $x\mu+y\nu = 1$ for some $x,y\in A$, then $(\alpha_i\beta_j)$ is
+  an integral basis of $MN$, with discriminant $m^\nu n^\mu$.
+\end{prop}
+
+% \begin{exercise}
+%   foo
+% \end{exercise}
+
+\begin{prop}
+  If $\fI \subseteq \fJ$ are two nonzero finite $\ko_K$-submodules of $K$, then
+  $(\fJ:\fI)$ is finite. Moreover,
+  \[ d(\fI) = (\fJ:\fI)^2d(\fJ) \] holds.
+\end{prop}

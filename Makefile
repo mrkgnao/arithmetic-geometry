@@ -37,7 +37,7 @@ all: $(PROJNAME).pdf
 # missing file reference and interactively asking you for an alternative.
 
 $(PROJNAME).pdf: $(PROJNAME).tex
-	latexmk -pdf -pdflatex="pdflatex -interactive=nonstopmode" -use-make -pvc $<
+	latexmk -f -pdf -pdflatex="pdflatex -synctex=1 -interaction=batchmode" -use-make -pvc $<
 
 cleanall:
 	latexmk -C
