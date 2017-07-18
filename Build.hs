@@ -12,7 +12,10 @@ cmd_ = cmd
 
 opts =
   shakeOptions
-  {shakeVerbosity = Loud, shakeProgress = progressDisplay 0.1 putStrLn}
+  { shakeVerbosity = Loud
+  , shakeProgress = progressDisplay 1 putStrLn
+  , shakeReport = ["report.html"]
+  }
 
 main :: IO ()
 main = shakeArgs opts rules
@@ -32,7 +35,7 @@ rules = do
     putNormal "First pdflatex pass"
     tex <- getDirectoryFiles "" ["*.tex"]
     need tex
-    cmd_ "pdflatex -synctex=1 -interaction=batchmode main.tex"
+    cmd_ "pdflatex -synctex=1 -draftmode -interaction=batchmode main.tex"
     cmd_ "pdflatex -synctex=1 -interaction=batchmode main.tex"
 
   -- "_build//*.o" %> \out -> do

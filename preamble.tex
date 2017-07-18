@@ -1,0 +1,35 @@
+\documentclass[a4paper,12pt,oneside]{memoir}
+
+% \pdfcompresslevel=0
+% \pdfobjcompresslevel=0
+
+\setulmarginsandblock{2cm}{2cm}{*}
+\setlrmarginsandblock{2cm}{2cm}{*}
+\checkandfixthelayout
+
+\usepackage{amsmath,amssymb,amsfonts,mathrsfs,amsthm}
+\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{tikz}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={blue!70!black},
+    citecolor={blue},
+    urlcolor={blue}
+}
+
+\usetikzlibrary{cd}
+
+% Fonts
+
+\usepackage[euler-digits,euler-hat-accent]{eulervm}
+\usepackage{palatino}
+\usepackage[protrusion=true,expansion=true]{microtype}
+
+\usepackage{subfiles}
+
+\input{generated-preamble.tex}
+
+\input{custom-preamble.tex}

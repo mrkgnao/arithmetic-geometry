@@ -1,37 +1,9 @@
-\documentclass[a4paper,12pt,oneside]{memoir}
+\input{preamble.tex}
 
-\setulmarginsandblock{2cm}{2cm}{*}
-\setlrmarginsandblock{2cm}{2cm}{*}
-\checkandfixthelayout
-
-\usepackage{amsmath,amssymb,amsfonts,mathrsfs,amsthm}
-\usepackage{varioref}
-\usepackage{hyperref}
-\usepackage{cleveref}
-\usepackage{tikz}
-\usepackage{xcolor}
-\hypersetup{
-    colorlinks,
-    linkcolor={blue!70!black},
-    citecolor={blue},
-    urlcolor={blue}
-}
-
-\usetikzlibrary{cd}
-
-\usepackage[euler-digits,euler-hat-accent]{eulervm}
-\usepackage{palatino}
-
-\usepackage[protrusion=true,expansion=true]{microtype}
-
-\input{generated-preamble.tex}
-
-\input{custom-preamble.tex}
+\begin{document}
 
 \title{Arithmetic geometry notes}
 \author{Soham Chowdhury}
-
-\begin{document}
 
 \maketitle
 
@@ -46,7 +18,7 @@
 
 \appendix
 
-\input{complex-analysis.tex}
+\subfile{complex-analysis.tex}
 \input{modular-forms.tex}
 
 \backmatter
