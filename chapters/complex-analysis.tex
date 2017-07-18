@@ -18,17 +18,38 @@ take $h\in\bc$. Write
 \end{alignat*}
 
 Then $f' = u_x + iv_x$, and similarly taking $h = ik$ gives $f' = v_y - iu_y$.
-Comparing the two expressions, we have
+Comparing the two expressions, we obtain the \emph{Cauchy-Riemann equations}:
 
+\noindent
 \begin{alignat}{2}
   &u_x &&= v_y\\
   -&u_y &&= v_x
 \end{alignat}
 
+Let $U \subseteq \bc$ be an open set.
+
 \begin{definition}
-  A function $f : \bc \to \bc$ is \emph{holomorphic}, or \emph{complex
-    differentiable}, 
+  \label{def:holomorphic}
+  A function $f : U \to \bc$ is \emph{holomorphic}, or \emph{complex
+    differentiable}, if the limit
+  \[
+    f'(z) = \lim_{h\to0} \frac{f(x+h)-f(x)} h
+  \]
+  exists. $f$ is said to be \emph{holomorphic on $U$} if it is holomorphic at
+  every point of $U$.
 \end{definition}
+
+\begin{definition}
+  \label{def:entire}
+  If $f$ is holomorphic on all of $\bc$, it is said to be \emph{entire}.
+\end{definition}
+
+From the explicit limits we calculated above, we know that holomorphy on a
+domain $U$ implies that the Cauchy-Riemann equations hold on $U$. In fact, the
+converse is also true!
+
+Holomorphy is a much more rigid requirement than real-analytic differentibility
+on $\br^2$.
 
 \section{Zeroes and poles}
 \label{sec:zeroes-and-poles}

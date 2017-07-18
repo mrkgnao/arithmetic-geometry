@@ -9,6 +9,8 @@
     "subfiles10")
    (LaTeX-add-labels
     "sec:holomorphy"
+    "def:holomorphic"
+    "def:entire"
     "sec:zeroes-and-poles"))
  :latex)
 
