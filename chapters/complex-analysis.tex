@@ -1,59 +1,235 @@
 \documentclass[../main.tex]{subfiles}
 \chapter{Complex analysis}
 
-\section{Holomorphy}
+\section{Holomorphy and complex differentiability}
 \label{sec:holomorphy}
 
-In the definition of the derivative
+\newcommand{\otobc}{\Omega\to\bc}
 
-\begin{equation*}
-  f'(z) = \lim_{h\to0} \frac{f(x+h)-f(x)} h
-\end{equation*}
+There are, broadly speaking, two criteria that we would like nice complex-valued
+functions to satisfy. The first is a notion of differentiability similar to the
+one from calculus, where every function can be linearly approximated by a
+\emph{derivative}, while the second asks that every function be locally
+representable by a \emph{power series} expansion.
 
-take $h\in\bc$. Write
+\medskip\noindent This section will develop these notions, demonstrate relations
+between the two, and discuss some simple consequences of these conditions.
 
-\begin{alignat*}{3}
-  &f(z) &&= u(z) &&+ iv(z)\\
-  &f(x,y) &&= u(x,y) &&+ iv(x,y)
-\end{alignat*}
+\subsection{Initial definitions}
 
-Then $f' = u_x + iv_x$, and similarly taking $h = ik$ gives $f' = v_y - iu_y$.
-Comparing the two expressions, we obtain the \emph{Cauchy-Riemann equations}:
+\medskip\noindent Let $\Omega \subseteq \bc$ be an open set.
+
+\begin{definition}
+  \label{def:c-diff}
+  A function $f : \Omega \to \bc$ is \emph{complex differentiable at $z_0$} if
+  the limit
+  \[
+    f'(z_0) = \lim_{h\to0} \frac{f(z_0+h)-f(z_0)} h
+  \]
+  exists. $f$ is said to be \emph{complex differentiable on $\Omega$} if it is
+  complex differentiable at all $z_0 \in \Omega$.
+\end{definition}
+
+\begin{definition}[Narasimhan]
+  \label{def:holomorphic}
+  $f : \Omega\to\bc$ is \emph{holomorphic on $\Omega$} if, for all $z_0
+  \in\Omega$, there exists a neighborhood $U\subseteq\Omega$ of $z_0$ and a
+  sequence $\{c_n\}_{n \ge 0}$ of complex numbers such that, for all $z \in U$,
+  the series
+  \[\sum_{n=0}^\infty c_n (z-z_0)^n\]
+  converges to $f(z)$.
+\end{definition}
+
+These two definitions are in fact equivalent: holomorphy on $\Omega$ is the same
+as $\bc$-differentiability on $\Omega$. This is the content of the
+Cauchy-Goursat theorem, which we will prove later (TODO ref).
+
+\subsection{Properties}
+\medskip
+Holomorphy and complex differentiability imply relations between the
+``$x$-behavior'' and ``$y$-behavior'' of a function, so that there are certain
+rigidity properties we can be assured of. We now show a few properties which are
+all roughly similar in nature, culminating in the \Cref{def:cauchy-riemann}.
+
+\begin{prop}
+  \label{thm:partial-x-y-c-diff}
+  Let $f : \otobc$ be $\bc$-differentiable at $a\in\Omega$. Then $\partial_x
+  f(a)$ and $\partial_yf(a)$ exist, and
+  \[\pfrac fx(a) = -i\pfrac fy(a) = f'(a)\]
+  holds.
+\end{prop}
+\begin{proof}
+  In the Riemann tradition, write $a = \sigma+it$. We will calculate $f'(a)$ in
+  two ways, by approaching $0$ along the real axis, then along the imaginary
+  axis. 
+
+  \medskip\noindent
+  Taking $0\ne\xi\in\br$,
+  \begin{align*}
+    f'(a) &= \lim_{\xi\to0}\frac{f(a+\xi)-f(a)}\xi\\
+          &=\lim_{\xi\to0}\frac{f(\sigma+\xi,t)-f(\sigma,t)}\xi\\
+          &=\pfrac fx(a).
+  \end{align*}
+
+  Taking $0\ne\eta\in\br$,
+  \begin{align*}
+    f'(a) &= \lim_{\xi\to0}\frac{f(a+\eta)-f(a)}{i\eta}\\
+          &=\lim_{\xi\to0}\frac{f(\sigma,t+\eta)-f(\sigma,t)}{i\eta}\\
+          &=\frac1i \pfrac fy(a).
+  \end{align*}
+
+  Equating these two expressions to $f'(a)$ is then enough.
+\end{proof}
+
+Note that $x$ and $y$ can be expressed in terms of $z$ and $\bar z$:
 
 \noindent
-\begin{alignat}{2}
-  &u_x &&= v_y\\
-  -&u_y &&= v_x
-\end{alignat}
+\begin{align*}
+  x &= \frac{z+\bar z}2\\
+  y &= \frac{z-\bar z}{2i}
+\end{align*}
 
-Let $U \subseteq \bc$ be an open set.
+This means one can (formally?) write, using the chain rule,
 
-\begin{definition}
-  \label{def:holomorphic}
-  A function $f : U \to \bc$ is \emph{holomorphic}, or \emph{complex
-    differentiable}, if the limit
-  \[
-    f'(z) = \lim_{h\to0} \frac{f(x+h)-f(x)} h
-  \]
-  exists. $f$ is said to be \emph{holomorphic on $U$} if it is holomorphic at
-  every point of $U$.
-\end{definition}
+\[ \pfrac fz = \pfrac fx \pfrac xz + \pfrac fy \pfrac yz = \frac12\cdot\pfrac fz +
+  \frac1{2i}\cdot\pfrac fy = \frac12 (f_z - if_y) \]
+
+\begin{exercise}
+  What is the analogous expression for $\partial_{\bar z}$?
+\end{exercise}
+
+This motivates the following definition.
 
 \begin{definition}
-  \label{def:entire}
-  If $f$ is holomorphic on all of $\bc$, it is said to be \emph{entire}.
+  \label{def:wirtinger}
+  The \emph{Wirtinger derivatives} are differential operators defined as
+  follows:
+
+  \noindent
+  \begin{alignat*}{3}
+    &\partial_z       &&= \pfrac\relax z &&= \frac12\left( \partial_x - i\partial_y \right)\\
+    &\partial_{\bar z} &&= \pfrac\relax {\bar z} &&= \frac12\left( \partial_x + i\partial_y \right)
+  \end{alignat*}
 \end{definition}
 
-From the explicit limits we calculated above, we know that holomorphy on a
-domain $U$ implies that the Cauchy-Riemann equations hold on $U$. In fact, the
-converse is also true!
+\begin{prop}
+  If $f:\otobc$ is $\bc$-differentiable at $a\in\Omega$,
+  \begin{align*}
+    \pfrac fz(a) &= f'(a)\\
+    \pfrac f{\bar z}(a) &= 0
+  \end{align*}
+\end{prop}
 
-Holomorphy is a much more rigid requirement than real-analytic differentibility
-on $\br^2$.
+\begin{exercise}
+  Prove this. (This is essentially a restatement of \Cref{thm:partial-x-y-c-diff}
+  using the new notation.)
+\end{exercise}
+
+
+\noindent
+\begin{definition}
+  \label{def:cauchy-riemann}
+  Let $f:\otobc$ be written as $f = u + iv$, where $u, v:\Omega\to\br$. Then the
+  equations
+  \begin{align*}
+    \pfrac fx &= i\pfrac fy\\
+    \pfrac fz &= \pfrac fx\\
+    \pfrac f{\bar z} &= 0
+  \end{align*}
+
+  are each equivalent to the following pair of equations:
+  \begin{alignat}{2}
+    &u_x &&= v_y\\
+    -&u_y &&= v_x
+  \end{alignat}
+  These differential equations are called the \emph{Cauchy-Riemann equations}.
+\end{definition}
+
+% Note that
+
+% \noindent
+% \begin{alignat}{3}
+%   &x &&= \frac12 &&({z+\bar z})\\
+%   &y &&= \frac1{2i} &&({z-\bar z})
+% \end{alignat}
+
+% Then the action of the Wirtinger derivatives is seen to really be equivalent to
+
+
+% From the explicit limits we calculated above, we know that holomorphy on a
+% domain $U$ implies that the Cauchy-Riemann equations hold on $U$. In fact, the
+% converse is also true!
+
+% Holomorphy is a much more rigid requirement than real-analytic differentibility
+% on $\br^2$.
+
+Define an $\br$-isomorphism of fields
+
+\medskip\noindent
+\begin{alignat*}{3}
+  &\mu&&:\bc&&\to\br^2\\
+      &&&x + iy&&\mapsto(x,y)
+\end{alignat*}
+
+Let $f:\otobc$ have first partial derivatives at $w$. We have the
+\emph{Jacobian map}, represented in the standard basis by
+
+\[
+J_w(u, v) = \begin{bmatrix}
+ u_x(w) & u_y(w)\\v_x(w) & v_y(w) 
+\end{bmatrix}
+\]
+
+\medskip\noindent
+This is a local isomorphism of $\br^2$ onto the tangent space $T_w\br^2 \simeq
+\br^2$. We ``lift'' this to $\bc$:
+
+\begin{definition}
+  The \emph{tangent map} of $f = u + iv$ at $w$ is
+  \[d_wf := \mu^{-1} \triangleleft J_w(u,v) \triangleleft \mu \]
+\end{definition}
+
+\begin{prop}
+  We have $\partial_{\bar z}f(w) = 0$ iff $d_wf$ is $\bc$-linear, that is, if
+  \[d_wf(\lambda\cdot z) = \lambda\cdot d_wf(z)\]
+  in which case
+  \[d_wf(z) = z \cdot \partial_z f(w) = z \cdot f'(w) \]
+\end{prop}
+
+Notice that this says exactly that $f$ is locally linear.
+
+\begin{proof}
+  TODO. Pretty weird in Narasimhan.
+\end{proof}
+
+$\bc$-differentiable functions satisfy the expected properties:
+\begin{enumerate}
+\item Given differentiable $f,g:\otobc$ and $\lambda\in\bc$,
+  \begin{align*}
+    f + g &: z \mapsto f(z) + g(z)\\
+    f\cdot g &: z\mapsto f(z) \cdot g(z)\\
+    \lambda\cdot f &:z\mapsto \lambda \cdot f(z)
+  \end{align*}
+  are all $\bc$-differentiable.
+\end{enumerate}
 
 \section{Zeroes and poles}
 \label{sec:zeroes-and-poles}
 
 \begin{definition}[Zeros]
 
+\end{definition}
+
+\begin{definition}
+  A function $f : \bc \to \bc$ is \emph{elliptic} if, for all $\lambda$ in some
+  lattice $\Lambda$, $f(z + \lambda) = f(z)$ for all $z \in \bc$.
+\end{definition}
+
+\begin{theorem}[Liouville]
+  Any bounded entire function is constant.
+\end{theorem}
+
+\begin{definition}
+  \label{def:entire}
+  If $f$ is holomorphic on all of $\bc$, it is said to be \emph{entire}.
 \end{definition}

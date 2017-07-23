@@ -1,1 +1,88 @@
 \chapter{Modular forms}
+
+\section{The hyperbolic plane}
+\label{sec:the-hyperbolic-plane}
+
+\begin{definition}
+  The \emph{upper half-plane} in $\bc$ is
+  \[ \upperhalfplane := \{ h\in\bc : Im(h) > 0 \} \]
+\end{definition}
+
+\section{M\"obius transformations}
+\label{sec:fractional-linear-transformations}
+
+\[ \frac{az+b}{cz+d} \]
+
+\section{The modular group}
+\label{sec:the-modular-group}
+
+Define M\"obius transformations
+
+\begin{align*}
+  S &= \begin{bmatrix}               & 1 \\ -1 &   \end{bmatrix} \\
+  T &= \begin{bmatrix} \hphantom{-}1 & 1 \\    & 1 \end{bmatrix}
+\end{align*}
+
+As before, the actions of these two matrices are as follows:
+
+\begin{alignat*}{3}
+  & Sz &&= \frac{0z + 1}{-1z + 0} &&= -\frac1z\\
+  & Tz &&= \frac{1z + 1}{0z + 1} &&= z + 1
+\end{alignat*}
+
+$S$ is an inversion about the unit circle ($z \mapsto 1/z$) followed by
+reflection across the imaginary axis ($z \mapsto -z$), while $T$ is a simple
+translation.
+
+These form a ``basis'', a generating set, for the modular group:
+
+\begin{prop}
+  $PSL_2(\bz) = \langle {S, T} \rangle$.
+\end{prop}
+
+% TODO add generators proof from:
+% http://math.mit.edu/~brubaker/Math784/modular.pdf
+
+\section{A fundamental domain for $PSL_2(\bz)$}
+\label{sec:a-fundamental-domain-for-psl2-Z}
+
+\begin{definition}
+  Let $F \subset \upperhalfplane$ be a closed set with connected interior, and
+  let $\Gamma$ be a subgroup of $PSL_2(\bz)$. We say $F$ is a \emph{fundamental
+    domain} for $\Gamma \backslash \upperhalfplane$ or for $\Gamma$ if
+  \begin{enumerate}
+  \item any $h \in \upperhalfplane$ is $\Gamma$-equivalent to some point in $F$
+  \item no two interior points of $F$ are equivalent under the $\Gamma$ action
+  \item the boundary of $F$ is piecewise smooth
+  \end{enumerate}
+\end{definition}
+
+Define $\bm = PSL_2(\bz)$.
+
+We now exhibit a fundamental domain for $PSL_2(\bz)$. Let
+\[F =  \{h \in \upperhalfplane : |\Re(h)| \le \frac12, |h| \ge 1 \}\]
+
+\begin{prop}
+  $F$ is a fundamental domain for $\bm$.
+\end{prop}
+
+\section{Congruence subgroups}
+\label{sec:congruence-subgroups}
+
+\begin{definition}
+  Let $N \in \bz_{>0}$. The \emph{modular group} of \emph{level} $N$ is
+  \[\Gamma_0(N) = \left\{\begin{bmatrix} a&b\\c&d \end{bmatrix} \in \bm : c
+      \equiv 0 \Mod N \right\}\]
+\end{definition}
+
+We also have
+
+  \[\Gamma_1(N) = \left\{\begin{bmatrix} a&b\\c&d \end{bmatrix} \in \bm
+      : \begin{bmatrix} a&b\\c&d \end{bmatrix}
+      \equiv \begin{bmatrix}1&b\\0&1 \end{bmatrix} \Mod N \right\}\]
+
+  and the \emph{principal congruence subgroups}
+
+  \[\Gamma(N) = \left\{\begin{bmatrix} a&b\\c&d \end{bmatrix} \in \bm
+      : \begin{bmatrix} a&b\\c&d \end{bmatrix}
+      \equiv \begin{bmatrix}1&0\\0&1 \end{bmatrix} \Mod N \right\}\]

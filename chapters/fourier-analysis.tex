@@ -1,0 +1,57 @@
+\chapter{Fourier analysis}
+
+\section{Fourier expansions}
+\label{sec:fourier-expansions}
+
+Let $g : \bc \to \hat\bc$ be a continuous function with period $1$.
+
+The $n$th \emph{Fourier coefficient} $a_n(y)$ is
+\[ a_n(y) = \hat g(n) = \int_0^1 g(z) exp(-2\pi i n z) dx \]
+
+Then we have the \emph{Fourier expansion}
+\[ g(z) = \sum_{n=-\infty}^\infty a_n(y) exp(2\pi inz) \]
+
+\section{Meromorphicity}
+\label{sec:meromorphicity}
+
+The \emph{nome} is a common building block for interesting functions.
+
+\[ q = q(z) := exp(2 \pi i z) \]
+
+Let $g$ be meromorphic in the notation of the previous section. Then there
+exists a unique meromorphic $G : \bc^\times \to \hat\bc$ such that $g(z) =
+G(q)$ (TODO why?): in other words, a period-$1$ meromorphic function of $z$ is in fact a
+function of $q(z)$.
+
+Note that $G$ has a removable singularity at $0$, so, by Theorem ???, $G$
+extends to a meromorphic function on $\bc$ iff
+\[ \lim_{q\to0} G(q) |q|^m = 0\] for some $m$. What does it mean for $q$ to go
+to $0$?
+
+\begin{align*}
+  q \to 0 &\implies exp(2\pi i(x+iy)) \to 0\\
+          &\implies exp(2\pi i x) e^{-2 \pi y} \to 0\\
+          &\implies y \to \infty
+\end{align*}
+
+so we have \( g(z)|q|^m \to 0\) as \( g(z) exp(-2\pi m y) \to 0 \), so we need
+
+\[ \text{as } \Im(z) \to \infty, \exists m\;\; |g(z)| < exp(2\pi my) \]
+
+The meromorphy of $G(q)$ at $0$ thus requires $\Im(z)\to\infty$, in which case
+we say $g$ is \emph{meromorphic at $i\infty$}. Then $G$, being meromorphic at
+$0$, has a Laurent series expansion
+
+\[ g(z) = G(q) = \sum_{n=-m}^\infty c_nq^n = \sum_{n=-m}^\infty c_n e^{2\pi inz} \]
+
+Here $m$ is the order of the pole of $G$ at $0$. However, we also have a Fourier
+expansion
+
+\[ g(z) = \sum_{n=-\infty}^\infty a_n(y) e^{2\pi inz} \]
+
+and, equating coefficients,
+
+\begin{align*}
+  a_n(y) &= c_n &\text{ for } n\ge -m\\
+  a_n(y) &= 0   &\text{ for } n < -m
+\end{align*}

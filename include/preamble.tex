@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,oneside]{memoir}
+\documentclass[a4paper,14pt,oneside]{memoir}
 
 % \pdfcompresslevel=0
 % \pdfobjcompresslevel=0
@@ -6,7 +6,7 @@
 % Layout
 
 \setulmarginsandblock{2cm}{2cm}{*}
-\setlrmarginsandblock{2cm}{2cm}{*}
+\setlrmarginsandblock{1cm}{1cm}{*}
 \checkandfixthelayout
 
 \usepackage{amsmath,amssymb,amsfonts,mathrsfs,amsthm}
@@ -17,7 +17,7 @@
 \usepackage{xcolor}
 \hypersetup{
     colorlinks,
-    linkcolor={blue!70!black},
+    linkcolor={green!70!black},
     citecolor={blue},
     urlcolor={blue}
 }
@@ -31,3 +31,20 @@
 \usepackage[protrusion=true,expansion=true]{microtype}
 
 \usepackage{subfiles}
+
+% Invert colors, but not exactly properly
+% these commands are from xcolor
+
+% \pagecolor[rgb]{0.15,0.15,0.18}
+% \color[rgb]{0.9,0.9,0.9}
+
+% Use AMS Euler for \lim and so on
+
+\makeatletter
+\def\operator@font{\mathnormal}
+\makeatother
+
+% \maxsecnumdepth{subsection}
+
+\setsubsecheadstyle{\centering\large\bfseries}
+\settocdepth{subsection}
