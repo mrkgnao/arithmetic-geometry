@@ -45,11 +45,10 @@ as $\bc$-differentiability on $\Omega$. This is the content of the
 Cauchy-Goursat theorem, which we will prove later (TODO ref).
 
 \subsection{Properties}
-\medskip
-Holomorphy and complex differentiability imply relations between the
+\medskip Holomorphy and complex differentiability imply relations between the
 ``$x$-behavior'' and ``$y$-behavior'' of a function, so that there are certain
 rigidity properties we can be assured of. We now show a few properties which are
-all roughly similar in nature, culminating in the \Cref{def:cauchy-riemann}.
+all roughly similar in nature, culminating in \Cref{def:cauchy-riemann}.
 
 \begin{prop}
   \label{thm:partial-x-y-c-diff}
@@ -61,10 +60,9 @@ all roughly similar in nature, culminating in the \Cref{def:cauchy-riemann}.
 \begin{proof}
   In the Riemann tradition, write $a = \sigma+it$. We will calculate $f'(a)$ in
   two ways, by approaching $0$ along the real axis, then along the imaginary
-  axis. 
+  axis.
 
-  \medskip\noindent
-  Taking $0\ne\xi\in\br$,
+  \medskip\noindent Taking $0\ne\xi\in\br$,
   \begin{align*}
     f'(a) &= \lim_{\xi\to0}\frac{f(a+\xi)-f(a)}\xi\\
           &=\lim_{\xi\to0}\frac{f(\sigma+\xi,t)-f(\sigma,t)}\xi\\
@@ -91,8 +89,8 @@ Note that $x$ and $y$ can be expressed in terms of $z$ and $\bar z$:
 
 This means one can (formally?) write, using the chain rule,
 
-\[ \pfrac fz = \pfrac fx \pfrac xz + \pfrac fy \pfrac yz = \frac12\cdot\pfrac fz +
-  \frac1{2i}\cdot\pfrac fy = \frac12 (f_z - if_y) \]
+\[ \pfrac fz = \pfrac fx \pfrac xz + \pfrac fy \pfrac yz = \frac12\cdot\pfrac fz
+  + \frac1{2i}\cdot\pfrac fy = \frac12 (f_z - if_y) \]
 
 \begin{exercise}
   What is the analogous expression for $\partial_{\bar z}$?
@@ -108,7 +106,8 @@ This motivates the following definition.
   \noindent
   \begin{alignat*}{3}
     &\partial_z       &&= \pfrac\relax z &&= \frac12\left( \partial_x - i\partial_y \right)\\
-    &\partial_{\bar z} &&= \pfrac\relax {\bar z} &&= \frac12\left( \partial_x + i\partial_y \right)
+    &\partial_{\bar z} &&= \pfrac\relax {\bar z} &&= \frac12\left( \partial_x +
+      i\partial_y \right)
   \end{alignat*}
 \end{definition}
 
@@ -121,8 +120,8 @@ This motivates the following definition.
 \end{prop}
 
 \begin{exercise}
-  Prove this. (This is essentially a restatement of \Cref{thm:partial-x-y-c-diff}
-  using the new notation.)
+  Prove this. (This is essentially a restatement of
+  \Cref{thm:partial-x-y-c-diff} using the new notation.)
 \end{exercise}
 
 
@@ -153,36 +152,35 @@ This motivates the following definition.
 %   &y &&= \frac1{2i} &&({z-\bar z})
 % \end{alignat}
 
-% Then the action of the Wirtinger derivatives is seen to really be equivalent to
+% Then the action of the Wirtinger derivatives is seen to really be equivalent
+% to
 
 
 % From the explicit limits we calculated above, we know that holomorphy on a
 % domain $U$ implies that the Cauchy-Riemann equations hold on $U$. In fact, the
 % converse is also true!
 
-% Holomorphy is a much more rigid requirement than real-analytic differentibility
-% on $\br^2$.
+% Holomorphy is a much more rigid requirement than real-analytic
+% differentibility on $\br^2$.
 
 Define an $\br$-isomorphism of fields
 
 \medskip\noindent
 \begin{alignat*}{3}
   &\mu&&:\bc&&\to\br^2\\
-      &&&x + iy&&\mapsto(x,y)
+  &&&x + iy&&\mapsto(x,y)
 \end{alignat*}
 
-Let $f:\otobc$ have first partial derivatives at $w$. We have the
-\emph{Jacobian map}, represented in the standard basis by
+Let $f:\otobc$ have first partial derivatives at $w$. We have the \emph{Jacobian
+  map}, represented in the standard basis by
 
 \[
-J_w(u, v) = \begin{bmatrix}
- u_x(w) & u_y(w)\\v_x(w) & v_y(w) 
-\end{bmatrix}
+  J_w(u, v) = \begin{bmatrix} u_x(w) & u_y(w)\\v_x(w) & v_y(w)
+  \end{bmatrix}
 \]
 
-\medskip\noindent
-This is a local isomorphism of $\br^2$ onto the tangent space $T_w\br^2 \simeq
-\br^2$. We ``lift'' this to $\bc$:
+\medskip\noindent This is a local isomorphism of $\br^2$ onto the tangent space
+$T_w\br^2 \simeq \br^2$. We ``lift'' this to $\bc$:
 
 \begin{definition}
   The \emph{tangent map} of $f = u + iv$ at $w$ is
@@ -191,8 +189,7 @@ This is a local isomorphism of $\br^2$ onto the tangent space $T_w\br^2 \simeq
 
 \begin{prop}
   We have $\partial_{\bar z}f(w) = 0$ iff $d_wf$ is $\bc$-linear, that is, if
-  \[d_wf(\lambda\cdot z) = \lambda\cdot d_wf(z)\]
-  in which case
+  \[d_wf(\lambda\cdot z) = \lambda\cdot d_wf(z)\] in which case
   \[d_wf(z) = z \cdot \partial_z f(w) = z \cdot f'(w) \]
 \end{prop}
 
@@ -211,9 +208,170 @@ $\bc$-differentiable functions satisfy the expected properties:
     \lambda\cdot f &:z\mapsto \lambda \cdot f(z)
   \end{align*}
   are all $\bc$-differentiable.
+\item Consider open sets $U,V$ in $\bc$. If $f: U\to\bc$ and $g:V\to\bc$ are
+  complex differentiable, then $g\triangleleft f : U\to\bc$ is complex
+  differentiable if it is defined --- that is, if $f(U)\subseteq V$. Further,
+  for $z_0\in U$, we have a \emph{chain rule}:
+  \[ (g\triangleleft f)' = (g'\triangleleft f)\cdot f' \]
 \end{enumerate}
 
-\section{Zeroes and poles}
+Recall that a function is $C^k$ on some domain if all partial derivatives of
+orders $\le k$ exist and are continuous.
+
+\begin{prop}
+  \label{prop:c-r-implies-c-diff}
+  Let $f:\otobc$ be $C^1$ and satisfy the Cauchy-Riemann equations on $\Omega$.
+  Then $f$ is $\bc$-differentiable on $\Omega$.
+\end{prop}
+
+In fact, the partial derivatives only need to exist: the Looman--Menchoff
+theorem (TODO ref) says that they need not be assumed to be continuous
+themselves.
+
+\begin{proof}
+  Let $\zeta = \xi + i\eta$. Write $f = u + iv$, and let $w = \alpha + i\beta
+  \in \Omega$. Using Taylor's theorem for $C^1$ functions,
+  \begin{align*}
+    u(w+\zeta)-u(w) &= \tilde u(\alpha+\zeta, \beta+\eta) - \tilde u(\alpha,\beta)\\
+                    &= \pfrac {\tilde u}x(\alpha,\beta)\cdot\xi + \pfrac {\tilde u}y(\alpha,\beta)\cdot\eta + \varepsilon_1(\xi,\eta)\\
+                    &= \pfrac ux(w)\cdot\xi + \pfrac uy(w)\cdot\eta + \varepsilon_1(\xi,\eta)
+  \end{align*}
+  
+  Similarly, we have
+  \[ v(w+\zeta) - v(w) = \pfrac ux(w)\cdot\xi + \pfrac uy(w)\cdot\eta +
+    \varepsilon_2(\xi,\eta)\]
+
+  Crucially, as $\xi, \eta\to 0$, we have the bounds
+  \begin{align*}
+    \frac{\varepsilon_1(\xi, \eta)}{|\xi| + |\eta|} &\to 0\\
+    \frac{\varepsilon_2(\xi, \eta)}{|\xi| + |\eta|} &\to 0\\
+    \frac{\varepsilon(\xi, \eta)}{|\zeta|}  &\to 0 (how?)
+  \end{align*}
+
+  where $\varepsilon = \varepsilon_1 + i\varepsilon_2$.
+
+  We combine the previous two equations to get
+  \[f(w + \zeta) - f(w) = f_x(w)\cdot\xi + f_y(w)\cdot\eta + \epsilon(\zeta) \]
+
+  and, using the Cauchy-Riemann equations to write $f_y$ as $if_x$, we see that
+  the limit
+  \begin{align*}
+    \lim_{\zeta\to0}\frac{f(w+\zeta)-f(w)}\zeta &= \frac{f_x(w) \cdot (\xi+i\eta)}{\zeta} + \lim_{\zeta\to0}\frac{\epsilon(\zeta)}\zeta\\
+                                                &=\pfrac fx(w)
+  \end{align*}
+  exists (and is differentiable?).
+\end{proof}
+
+\begin{erratum}
+  In his proof of \Cref{prop:c-r-implies-c-diff}, where Narasimhan writes $\zeta
+  = \mathcolor{blue}\zeta + i\eta$, he means $\zeta = \mathcolor{red}{\xi} +
+  i\eta$.
+\end{erratum}
+
+\section{Power series}
+\label{sec:power-series}
+
+\begin{lemma}[Abel]
+  Given a sequence $\{c_n\}_{n\ge0}$ in $\bc$, there exists $0\le R \in
+  \br_\infty = \br \cup \{\infty\}$ such that the series
+  \[\sum_{n=0}^\infty c_nz^n\]
+  converges for $|z|<R$ and diverges for $|z|>R$. Further, the series converges
+  \textbf{uniformly} on any compact subset of $D_R(0)$.
+\end{lemma}
+
+This means that, given any power series, there exists a disc inside which it
+converges and outside which it diverges. Abel's lemma does not say what will
+happen on the boundary circle $|z| = R$ (funny things do sometimes).
+
+\begin{proof}
+  Choose
+  \[R = \sup\;\{r \ge 0 : \exists M\ldotp\forall n\ge 0\ldotp|c_n|r^n \le M
+    \} \] or, in words, $R$ is the ``biggest'' disc inside which $|c_n||z|^n$ is
+  bounded. By construction,
+  \[|z| > R \implies |c_n||z|^n \text{ is not bounded} \] so (why? TODO) $\sum
+  c_nz^n$ cannot converge.
+
+  \medskip\noindent Let $K\subseteq D_R$ be compact. Choose $\rho < R$ such that
+  $K \subseteq D_\rho$, and $r$ such that $\rho < r < R$. There exists (?) $M>0$
+  such that $|c_n|r^n \le M$. For $z\in K$,
+
+  \medskip\noindent
+  \[ |c_nz^n| \le |c_n|\rho^n \le M \left( \frac\rho r \right)^n \]
+
+  Since $\rho < r$, we have $M\sum\left( \frac\rho r \right)^n < \infty$, so
+  that $\sum c_nz^n$ converges uniformly on $K$.
+\end{proof}
+
+\begin{definition}
+  The real number $R$ is called the \emph{radius of convergence} of
+  $\sum_{n=0}^\infty c_nz^n$.
+\end{definition}
+
+\begin{corollary}
+  Holomorphy on an open set $\Omega\subseteq\bc$ implies continuity on $\Omega$.
+\end{corollary}
+
+\begin{lemma}
+  The radius of convergence of
+  \[\sumoi n c_n z^{n-1}\]
+  is equal to that of
+  \[\sumzi c_n z^n.\]
+\end{lemma}
+\begin{proof}
+
+\end{proof}
+
+\subsubsection{Derivatives of power series}
+
+\begin{lemma}%
+  \label{lemma:power-difference-bound}
+  Let $a, b \in\bc$. We have
+  \[\abs {(a+b)^n - a^n} \le n \abs b \left( \abs a + \abs b \right)^{n-1}\] for
+  $n\ge1$.
+\end{lemma}
+
+\begin{proof}
+  From high-school algebra, we have the factorization
+  \begin{align*}
+    (a+b)^n - a^n &= (a+b-a)\sum_{k=0}^{n-1}(a+b)^{n-1-k}-a^k\\
+                  &= b\sum_{k=0}^{n-1}(a+b)^{n-1}\left(\frac{a}{a+b}\right)^k
+  \end{align*}
+  We take absolute values of both sides and apply the triangle inequality:
+  \begin{align*}
+    \abs{(a+b)^n - a^n} &= {\abs b}\abs{\sum_{k=0}^{n-1}{(a+b)}^{n-1}\left(\frac{a}{a+b}\right)^k} \\
+                        &\le {\abs b}\sum_{k=0}^{n-1}{\abs{a+b}}^{n-1}\abs{\frac{a}{a+b}}^k \\
+                        &\le {\abs b}\sum_{k=0}^{n-1}{\abs{a+b}}^{n-1} \\
+                        &= n {\abs b}{\left(  \abs{a} + \abs{b}\right)}^{n-1}
+  \end{align*}
+\end{proof}
+
+\begin{prop}
+  Let $R>0$, and consider a power series
+  \begin{align*}
+    \sumzi {c_n(z-z_0)^n} \to f(z) &\;\;\text{ for } z \in D_R(z_0)
+  \end{align*}
+  Then $f$ is $\bc$-differentiable on $D_R(z_0)$ and
+  \[ f'(z) = \sumoi {nc_n{(z-z_0)}^{n-1}} \text{ for } z\in D_R(z_0) \]
+\end{prop}
+
+\begin{proof}
+  Let $z \in D_R(z_0)$. Set
+
+  \[ R_\pm = \frac12(R\pm\abs{z-z_0})\]
+
+  \medskip\noindent
+  and choose a complex number $\zeta$ satisfying $0 < \abs \zeta < R_-$. Then
+
+  \[ \frac{f(z+\zeta) - f(z)}{\zeta} = \sumoi{c_n\frac{{(z+\zeta-z_0)}^n-{(z-z_0)}^n}{\zeta}} \]
+  
+  By \Cref{lemma:power-difference-bound},
+  \begin{align*}
+    \abs{\sum_{n>N}{c_n\frac{{(z+\zeta-z_0)}^n-{(z-z_0)}^n}{\zeta}}} &\le \sum_{n>N}n\abs{c_n}{(\abs\zeta+\abs{z-z_0})}^{n-1} \\
+                                                          &\le \sum_{n>N}n\abs{c_n}R_+^{n-1}
+  \end{align*}
+\end{proof}
+
+\section{Zeroes and poles}%
 \label{sec:zeroes-and-poles}
 
 \begin{definition}[Zeros]

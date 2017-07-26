@@ -10,6 +10,7 @@
 
 \newtheorem{exercise}{Exercise}[chapter]
 \renewcommand{\theexercise}{\thesection.\Alph{exercise}}
+\newtheorem{erratum}{Erratum}[chapter]
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
@@ -78,7 +79,34 @@
 
 \newcommand{\upperhalfplane}{\fh}
 
+\newcommand{\sumzi}{\sum_{n=0}^\infty}
+\newcommand{\sumoi}{\sum_{n=1}^\infty}
+
 \newcommand{\Mod}[1]{\ (\mathnormal{mod}\ #1)}
 
 \newcommand{\pfrac}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\pfracr}[1]{\frac{\partial}{\partial #1}}
+
+\makeatletter
+\def\mathcolor#1#{\@mathcolor{#1}}
+\def\@mathcolor#1#2#3{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+\makeatother
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
