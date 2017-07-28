@@ -222,3 +222,5 @@ TSWLatexianTemp*
 
 /.shake/
 /_shake/
+
+**/*.el
