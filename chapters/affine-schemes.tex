@@ -3,13 +3,62 @@
 \section{Motivation}
 \label{sec:motivation-for-affine-schemes}
 
+The main objects of study in "modern" algebraic geometry are \emph{schemes} -- a
+certain kind of "geometric space" that encompasses both geometric questions
+(such as questions about lines on surfaces) and number-theoretic or arithmetic
+problems (such as questions about integral points on curves). This all works out
+because schemes are built from rings, so we can cast geometric problems in terms
+of rings of functions on geometric spaces -- and algebraic number theory has
+been a thing for a very long time. This is a major idea behind algebraic
+geometry: sometimes it pays to look at some geometric object by considering the
+functions defined on that space.
+
+\medskip\noindent For instance, given a topological space $T$ , you can ask
+
+\begin{question}
+  What continuous real-valued functions $f:T\to\br$ can I define on the space,
+  satisfying $P$?
+\end{question}
+where $P$ is some property of continuous $\br$-valued functions.
+
+\medskip\noindent This question, by allowing you an indirect look at the space,
+often reveals very interesting information about the space that would have been
+difficult to gain otherwise. You can do similar things for smooth or complex
+manifolds. This "indirect viewpoint" is the primary one adopted in algebraic
+geometry.
+
+\begin{slogan}
+  Instead of looking at a space, look at the (rings of) functions defined on its
+  subsets.
+\end{slogan}
+
+Here is some motivation for what schemes are like, using some words we haven't
+defined here yet. You may have heard of differentiable or smooth manifolds: they
+are spaces that locally "look like" $\br^n$. For instance, a sphere looks like
+$\br^2$ if you "zoom in" enough. And we understand $\br^2$ just fine, and
+$\br^n$ in general -- this is just multivariable calculus. The idea here is that
+we can work with complicated spaces as long as, "locally", they look like things
+we understand.
+
+\medskip\noindent The definition we are aiming for is this:
+
+\begin{adefinition}[Target]
+  A scheme is a "locally ringed space" that is locally isomorphic to an affine
+  scheme.
+\end{adefinition}
+
+We will now spend some time constructing the notions that go into that
+statement, building intuition for what these things \emph{are}. In this chapter,
+we define \emph{affine schemes}, which are to schemes what Euclidean spaces are
+to manifolds.
+
 \section{The spectrum of a ring}
 \label{sec:the-spectrum-of-a-ring}
 
-\begin{definition}
- Define the \emph{spectrum} of a ring $R$ 
+\begin{adefinition}[Provisional]
+ Define the \emph{spectrum} of a ring $R$ as (at least for now) the set
 \[ \Spec R = \{ I \subseteq R : I \text{ is a prime ideal} \} \]
-\end{definition}
+\end{adefinition}
 
 The element of $\Spec R$ corresponding to the prime ideal $P$ of $R$ will be
 denoted $[P]$ when it is not clear from context.

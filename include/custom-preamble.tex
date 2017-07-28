@@ -1,19 +1,37 @@
 \renewcommand\qedsymbol{$\blacksquare$}
 
+% Italicized theorem-ish objects
+
+\theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[chapter]
+\newtheorem*{theorem*}{Theorem}
 \renewcommand{\thetheorem}{\thesection.\arabic{theorem}}
 
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{aside}[theorem]{Aside}
+\newtheorem{erratum}{Erratum}[chapter]
+\newtheorem{slogan}[theorem]{Slogan}
 
 \newtheorem{exercise}{Exercise}[chapter]
 \renewcommand{\theexercise}{\thesection.\Alph{exercise}}
-\newtheorem{erratum}{Erratum}[chapter]
 
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
+
+\newtheoremstyle{adjectival}{}{}{\itshape}{}{\bfseries}{.}{.5em}{\thmnote{#3 }#1 #2}
+\theoremstyle{adjectival}
+\newtheorem{atheorem}[theorem]{Theorem}
+\newtheorem{alemma}[theorem]{Lemma}
+\newtheorem{acorollary}[theorem]{Corollary}
+\newtheorem{aproposition}[theorem]{Proposition}
+\newtheorem{adefinition}[theorem]{Definition}
 
 \newcommand{\mr}[1]{\br^{#1}}
 
@@ -56,24 +74,12 @@
 % \def\operator@font{\mathgroup\symsfoperators}
 % \makeatother
 
-\newcommand{\Tr}[1]{{\mathnormal{Tr}}_{L|K}(#1)}
-\newcommand{\Trg}[2]{{\mathnormal{Tr}}_{#1}({#2})}
-
-\newcommand{\Trm}[0]{{\mathnormal{Tr}}_{L|K}}
-\newcommand{\Trmg}[1]{{\mathnormal{Tr}}_{#1}}
-
 \DeclareMathOperator{\tr}{{\mathnormal{tr}}}
 
 \let\det\relax
 \DeclareMathOperator{\det}{{\mathnormal{det}}}
 
 \DeclareMathOperator{\id}{{\mathnormal{id}}}
-
-\newcommand{\Nm}[1]{{\mathnormal{Nm}}_{L|K}(#1)}
-\newcommand{\Nmg}[2]{{\mathnormal{Nm}}_{#1}({#2})}
-
-\newcommand{\Nmm}[0]{{\mathnormal{Nm}}_{L|K}}
-\newcommand{\Nmmg}[1]{{\mathnormal{Nm}}_{#1}}
 
 \setlength\parindent{0pt}
 
@@ -112,3 +118,39 @@
 \let\oldnorm\norm
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
+
+\newcommand{\newTerm}[1]{\emph{#1}\xspace}
+
+\newcommand{\ringExtension}[2]{#1 \mathop{|} #2}
+
+\newcommand{\ringExtensionA}[1]{\ringExtension{#1}{A}}
+\newcommand{\ringExtensionK}[1]{\ringExtension{#1}{K}}
+
+\newcommand{\ringExtensionBA}[0]{\ringExtension{B}{A}}
+\newcommand{\ringExtensionLK}[0]{\ringExtension{L}{K}}
+
+\newcommand{\fieldExtensionDegree}[2]{[#1 : #2]}
+
+%
+% Norms and traces
+%
+
+\newcommand{\normMapInFieldExtension}[2]{{\mathnormal{Nm}}_{\ringExtension{#1}{#2}}}
+\newcommand{\normInFieldExtension}[3]{{\normMapInFieldExtension{#1}{#2}}\left(#3\right)}
+
+\newcommand{\normMapInFieldExtensionLK}[0]{\normMapInFieldExtension{L}{K}}
+\newcommand{\normInFieldExtensionLK}[1]{\normInFieldExtension{L}{K}{#1}}
+
+\let\Nm\normInFieldExtensionLK
+\let\Nmm\normMapInFieldExtensionLK
+\let\Nmmg\normMapInFieldExtension
+
+\newcommand{\traceMapInFieldExtension}[2]{{\mathnormal{Tr}}_{\ringExtension{#1}{#2}}}
+\newcommand{\traceInFieldExtension}[3]{{\traceMapInFieldExtension{#1}{#2}}\left(#3\right)}
+
+\newcommand{\traceMapInFieldExtensionLK}[0]{\traceMapInFieldExtension{L}{K}}
+\newcommand{\traceInFieldExtensionLK}[1]{\traceInFieldExtension{L}{K}{#1}}
+
+\let\Tr\traceInFieldExtensionLK
+\let\Trm\traceMapInFieldExtensionLK
+\let\Trmg\traceMapInFieldExtension

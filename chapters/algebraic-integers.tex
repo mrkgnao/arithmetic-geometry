@@ -1,11 +1,264 @@
 \chapter{Algebraic integers}
 
 \epigraph{Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue
-  ornare nulla, non luctus diam neque sit amet urna.}{The Dude} 
+  ornare nulla, non luctus diam neque sit amet urna.}{The Dude}
 
-Fix a domain $A$ integrally closed in $K := K(A)$. Let $L|K$ be a finite
-extension, and $B$ the integral closure of $A$ in $L$. This is the \emph{$AKLB$
-  diagram}:
+\section{Appetizer: Fermat's theorem on sums of two squares}%
+\label{sec:appetizer-fermat's-theorem-on-sums-of-two-squares}
+
+\begin{question}
+  Does the equation
+  \begin{align}p = a ^ 2 + b ^ 2 &&(p \text{ prime})\end{align} have nontrivial
+  solutions with integer \(a\) and \(b\)?
+\end{question}
+
+\begin{paragraph}{A bit of history}
+  This post is yet another from Ye Olde Days: I found a stray {\LaTeX} file in
+  an old \texttt{/home} folder. I wrote this for a friend at Canada/USA
+  Mathcamp, as part of my usual Number Theory Indoctrination™ Service.
+\end{paragraph}
+
+\medskip\noindent One start is to look at the equation mod \(4\). Since squares
+are always either \(0\) or \(1\) modulo \(4\) (work this out for yourself if
+it's not familiar) \(p\) can only be \(1\) mod \(4\). \footnote{\(0\) and \(2\)
+  are, uh, not really possibilities, except in the case \(2 = 1^2 + 1^2\).}
+Keeping this in mind, we restrict our attention to primes \(\equiv 1\Mod 4\).
+
+We notice that a nontrivial "factorization" of \(p\) of the form
+
+\[p=(a+ib)(a-ib) a, b\in{\mathbf Q}\]
+
+gives us an expression of the form we want, if we are willing to expand our
+notion of what factorization means beyond its usual meaning in \({\mathbf Z}\).
+In fact, the approach that we follow is to look at how different primes factor
+or "split" in the ring \({\mathbf Z}[i]\), which is the ring of numbers of the
+form
+
+\[ {\mathbf Z}[i] = \{a+ib : a, b\in{\mathbf Z}\} \]
+
+We will obtain a complete description of how integer primes split in this ring,
+the \newTerm{ring of Gaussian integers}, and thus prove the following:
+
+\begin{theorem*}[Fermat]
+  A prime number can be expressed as a sum of two integer squares iff it is
+  congruent to \(1\) mod \(4\).
+\end{theorem*}
+
+\subsection{\({\mathbf Z}[i]\) as a lattice}
+
+Notice that it can often be worthwhile to think of \({\mathbf Z}[i]\)
+geometrically, as a subset of the complex plane corresponding to all the complex
+numbers with integer real and complex parts. This gives \({\mathbf Z}[i]\) the
+structure of a (square) \newTerm{lattice}, which has an obvious meaning that we
+will not work hard to rigorize for now: think of the points in the plane with
+integer coordinates, where \( (x,y) \) corresponds to \( x+iy \).
+
+% <!-- Low-effort picture: --> <!-- \begin{tikzpicture} --> <!-- \begin{scope}
+%     --> <!-- \clip (-5,-5) rectangle (4cm,4cm); % Clips the picture... -->
+%     <!-- \draw[style=help lines,dashed] (-14,-14) grid[step=2cm]
+%     (14,14); % Draws a grid in the new coordinates. -->
+%     <!-- \foreach \x in {-7,-6,...,7}{ % Two indices running over each -->
+%     <!-- \foreach \y in {-7,-6,...,7}{ % node on the grid we have drawn -->
+%     <!-- \node[draw,circle,inner sep=2pt,fill] at (2\newTerm{\x,2}\y)
+%     {}; % Places a dot at those points -->
+%     <!-- } --> <!-- } --> <!-- \end{scope} --> <!-- \end{tikzpicture} -->
+
+\begin{aside}
+  This has very deep applications once we start considering more interesting
+  number fields: here we are looking at \({\mathbf Q}(i)\) and its \newTerm{ring
+    of integers} \({\mathbf Z}[i]\), and \({\mathbf Q}(i)\) is basically the
+  nicest number field in existence. We will see that arguments using the
+  "geometry of numbers", also called \newTerm{Minkowski theory}, are very powerful, and
+  will (for instance) enable us to prove the Dirichlet unit theorem.
+\end{aside}
+\subsection{Preliminaries}
+
+First, we review a few definitions from ring theory.
+
+% <!-- \begin{defn} --> An element \(r\) of a ring \(R\) is \newTerm{prime} if,
+%   whenever it divides a product \(ab\), it must divide either \(a\) or \(b\).
+%   <!-- \end{defn} -->
+
+% <!-- \begin{defn} --> An element \(r\in R\) is \newTerm{irreducible}<label
+%   for="sn-demo" class="margin-toggle sidenote-number"></label><input
+%   type="checkbox" id="sn-demo" class="margin-toggle"/><span
+%   class=sidenote>\newTerm{irred} if I'm lazy</span> if the only way to write
+%   it as a product of elements is
+%   \[r=u\cdot r_1\] where \(u\) is a unit, and \(r_1\) is \(u_1r\) for some
+%   unit \(u_1\). <!-- \end{defn} -->
+
+For example, \(2\) is not irred in \({\mathbf Z}[i]\), since \(2={(1+i)}^2\),
+but it is an irred in \({\mathbf Z}\), since the only ways to write it as a
+product are silly things like \((-1)\cdot (-2)\) and \(-2\) is manifestly a unit
+times \(2\).
+
+\begin{definition}
+  A ring \(R\) is \newTerm{Euclidean} if there exists a function \[\nu :
+    R\setminus\{0\}\to{\mathbf Z} ^ {\geq 0},\] called the \newTerm{Euclidean
+    valuation}, such that we can perform a "division algorithm" in the ring
+  using \(\nu\).
+\end{definition}
+That is, for any \(a, b\in R\), there exist \(q, r\in R\) such
+that\footnote{Note that the valuation of \(0\) is not defined, at least per this
+  definition. However, setting \(\nu(0)=0\) seems to work just fine.}
+
+
+\[a=bq+r, \nu(r) < \nu(b).\]
+
+For instance, \({\mathbf Z}\) is an Euclidean domain with valuation \(\nu(r) =
+|r|\).
+
+\begin{definition}
+  A \newTerm{principal ideal domain}, or \newTerm{PID} for short, is a ring
+  where all ideals are generated by a single element (all ideals are
+  \newTerm{principal}).
+\end{definition}
+
+\begin{definition}
+  A \newTerm{unique factorization domain} (often \newTerm{UFD} for short, or
+  sometimes \newTerm{factorial} ring or domain) is a ring where elements can be
+  uniquely factored into irreducible elements. That is, for all \(r\in R\),
+  there exists a factorization
+
+  \[ r=u\cdot p_1 ^ {a_1}p_2 ^ {a_2}\cdots p_k ^ {a_k} \]
+
+  where \(u\) is a unit, and the \(p_i\) and \(a_i\) are unique, up to
+  reordering of the \(p_i\).
+\end{definition}
+
+Now, we have:
+
+\begin{theorem}
+  Euclidean domain \(\implies\) PID.
+\end{theorem}
+\begin{proof}
+  Consider an arbitrary ideal \(I\) of our ring \(R\). Choose a smallest nonzero
+  element \(w\) from \(I\) (where "smallest" refers to the valuation being the
+  least).
+
+  Any other element of \(I\) can be written as
+
+  \[a = wq + r\]
+
+  where \(\nu(r) < \nu(w)\). But there is no such nonzero element, by the
+  assumption that \(w\) has the smallest valuation of any element of \(I\). We
+  conclude that \(r=0\). Hence \(w\) divides every other element of \(I\), so
+  \(I=(w)\).
+\end{proof}
+
+\begin{atheorem}[Very Useful]
+  PID \(\implies\) UFD.
+\end{atheorem}
+
+\begin{proof}
+  The proof is too messy to include here. Some references are provided in the
+  margin. A quick google turned up this pdf. ProofWiki also has an incomplete
+  proof.
+\end{proof}
+
+
+% http://www.maths.nuigalway.ie/MA416/section4-2.pdf.
+% https://proofwiki.org/wiki/Principal_Ideal_Domain_is_Unique_Factorization_Domain
+
+It's worth taking a moment to do the following (easy) exercise:
+
+\begin{exercise}
+  In any integral domain, primes are irreducible.
+\end{exercise}
+
+There is, in fact, a very important partial converse:
+
+\begin{exercise}[and Fact]
+  In a UFD, irreducibles are prime.
+\end{exercise}
+
+This will be helpful shortly. In fact, the only reason why we went to all the
+trouble with PIDs and so on is so that we could state this fact!
+
+\subsection{\({\mathbf Z}[i]\) is a UFD}
+
+\begin{prop}
+  The function \(\nu: {\mathbf Z}[i]\to{\mathbf Z}^{\geq 0}\) defined by
+
+  \[ \nu(a + ib) = a^2 + b^2 = | a + ib |^2 \]
+
+  is an Euclidean valuation on the ring \({\mathbf Z}[i]\).
+\end{prop}
+
+\begin{proof}
+  Given \(a,b\in{\mathbf Z}[i]\), we need to show that there exist
+  \(q,r\in{\mathbf Z}[i]\) such that
+
+  \begin{align}a=bq+r &&|r|^2 < |b|^2\end{align}
+
+  This is equivalent to \(\frac ab - q = \frac r b.\)
+
+  We need to find a \(b\) such that
+  \[\left|\frac ab - q\right| = \left| \frac rb\right|< 1.\]
+
+  Why is this possible? Notice that the number \(\frac ab\) lies in some square
+  of the lattice formed by the Gaussian integers in the complex plane. So there
+  will always be some lattice point within (at most) half the length of a
+  diagonal of a lattice square from \(\frac ab\). This suffices, since that
+  length is \(\frac{\sqrt 2}2 < 1\).
+\end{proof}
+If \(p=4n+1\) is a prime, then the congruence \[-1\equiv x^2\Mod p\] has a
+solution: indeed, by Wilson's theorem,
+
+\begin{align}
+  -1\equiv (p-1)! &= (1\cdot2\cdots{(2n)})\cdot((2n+1)\cdot(2n+2)\cdots{(4n)}) \\
+                  &\equiv (1\cdot2\cdots{(2n)})\cdot((-2n)\cdot(-2n+1)\cdots{(-1)}) \\
+                  &= (2n)!\cdot{(-1)^{2n}(2n)!} \\
+                  &= {[(2n)!]}^2 \Mod p
+\end{align}
+
+so taking \(x=(2n)!\) works.
+
+Now we are ready to prove the main theorem. We restate it here:
+
+\begin{theorem}[Fermat]
+  A prime number can be expressed as a sum of two integer squares iff it is
+  congruent to \(1\) mod \(4\).
+\end{theorem}
+
+\begin{proof}
+  It now suffices to show that a prime \(p\in{\mathbf Z}\) does not remain prime
+  in \({\mathbf Z}[i]\) if \(p\equiv 1\Mod 4\). When that is done, we have a
+  nontrivial factorization
+
+  \[ p=\alpha\cdot\beta \]
+
+  and taking norms (i.e. valuations) of both sides gives
+
+  \[ p^2 = (a^2 + b^2) \cdot\nu(\beta) \]
+
+  where we write \(\alpha = a+ib\). Now, since the factorization is nontrivial,
+  neither \(\alpha\) nor \(\beta\) are units, and hence we have \( p = a^2 + b^2
+  \), and we're done.
+
+  But for primes congruent to \(1\) modulo \(4\), we have our lemma which states
+  that there exists \(x\) such that \(x^2+1\equiv 0\Mod 4\). So \(p|x^2+1 =
+  (x+i)(x-i)\), but it does not divide either of the factors on the right (it
+  doesn't divide either of their imaginary parts). So \(p\) is not prime in
+  \({\mathbf Z}[i]\).
+
+  Now we use all the algebra we did: since \({\mathbf Z}[i]\) is a UFD, our Fact
+  from before tells us that \(p\) not prime implies that \(p\) is not
+  irreducible. So \(p\) has some factorization
+
+  \[p=\alpha\cdot\beta\]
+
+  in \({\mathbf Z}[i]\), and we're done.
+\end{proof}
+
+\section{Integral closure}
+
+\section{Integrality}
+
+\subsection{The setup}
+Fix a domain $A$ integrally closed in $K := K(A)$. Let $\ringExtension L K$ be a
+finite extension, and $B$ the integral closure of $A$ in $L$. This is the
+\newTerm{$AKLB$ diagram}:
 
 \[
   \begin{tikzcd}
@@ -14,7 +267,7 @@ extension, and $B$ the integral closure of $A$ in $L$. This is the \emph{$AKLB$
   \end{tikzcd}
 \]
 
-\section{Properties of integrality}
+\subsection{Basic properties}
 
 Integrality is stable under the ring operations: one would like the following to
 hold, and they do:
@@ -22,8 +275,8 @@ hold, and they do:
 This is a corollary of the following:
 
 \begin{theorem}[Module-theoretic characterization of integrality]{\label{module-integrality}}
-  A finite number of $b_i$ are integral over $A$ $\iff$ the ring $A[b_1,\ldots,b_n]$ is
-  finitely generated as an $A$-module.
+  A finite number of $b_i$ are integral over $A$ $\iff$ the ring
+  $A[b_1,\ldots,b_n]$ is finitely generated as an $A$-module.
 \end{theorem}
 \begin{proof}
   TODO.
@@ -34,8 +287,8 @@ This is a corollary of the following:
 \end{corollary}
 
 \begin{theorem}[Integrality is transitive]{\label{integrality-trans}}
-  Consider ring extensions $A \subseteq B \subseteq C$.
-  $A \subseteq B$ integral and $B \subseteq C$ integral $\iff$ $A \subseteq C$ integral.
+  Consider ring extensions $A \subseteq B \subseteq C$. $A \subseteq B$ integral
+  and $B \subseteq C$ integral $\iff$ $A \subseteq C$ integral.
 \end{theorem}
 \begin{proof}
   $A \subseteq C$ integral implies $A \subseteq B$ integral. (Why?)
@@ -90,7 +343,7 @@ trace and norm maps
   \Nm z &= \det T_z
 \end{align*}
 
-Let $n = [L : K]$. The characteristic polynomial
+Let $n = \fieldExtensionDegree L K$. The characteristic polynomial
 \begin{align*}
   \chi_z(t) &= \det (tI - T_z)\\
             &= t^n - a_1t^{n-1} + \cdots + (-1)^n a_n \in K[i]
@@ -108,8 +361,8 @@ contains coefficients $a_1 = \Tr z$ and $a_n = \Nm z$.
 Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 
 \begin{prop}
-  If $L|K$ is separable, letting $\sigma : L \to \bar{K}$ vary over the
-  $K$-embeddings of $L$ into $\bar{K}$, we have
+  If $\ringExtension L K$ is separable, letting $\sigma : L \to \bar{K}$ vary
+  over the $K$-embeddings of $L$ into $\bar{K}$, we have
   \begin{enumerate}
   \item \label{chi-z-product-exp} $\chi_z(t) = \prod_\sigma (t - \sigma z)$
   \item $\Tr z = \sum_\sigma \sigma z$
@@ -127,28 +380,30 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 \begin{theorem}{\label{mul-trace-norm}}
   For a tower of finite extensions $K \subseteq L \subseteq M$, we have
   \begin{alignat*}{2}
-    \Trmg{L|K} &\circ \Trmg {M|L} &&= \Trmg{M|K}\\
-    \Nmmg{L|K} &\circ \Nmmg {M|L} &&= \Nmmg{M|K}
+    \Trmg L K &\circ \Trmg M L &&= \Trmg M K\\
+    \Nmmg L K &\circ \Nmmg M L &&= \Nmmg M K
   \end{alignat*}
+  $\cos x$
 \end{theorem}
 
 \section{Integral bases}
 
 \begin{definition}
-  The \emph{\textbf{discriminant}} of a basis $\alpha_i$ of a separable
-  extension $L | K$ is defined by
+  The \newTerm{discriminant} of a basis $\alpha_i$ of a separable extension
+  $\ringExtension L K$ is defined by
   \[ d(\alpha_1,\ldots,\alpha_n) = \det((\sigma_i\alpha_j))^2 \] where the
   $\sigma_i$ are the $K$-embeddings $L \hookrightarrow {\bar{K}}$.
 \end{definition}
 
 
 \begin{prop}{\label{trace-form-bilinear}}
-  For $L|K$ a separable extension with basis $\alpha_i$, the function
+  For $\ringExtension L K$ a separable extension with basis $\alpha_i$, the
+  function
   \[(x,y) = \Tr{xy}\] yields a nondegenerate bilinear form on the $K$-vector
   space $L$.
 \end{prop}
 
-\begin{corollary} For $L|K$ and $\alpha_i$ as above,
+\begin{corollary} For $\ringExtension L K$ and $\alpha_i$ as above,
   \[d(\alpha_1,\ldots,\alpha_n) \neq 0.\]
 \end{corollary}
 
@@ -160,26 +415,27 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 \end{proof}
 
 \begin{lemma}
-  Let $(\alpha_i)$ be a basis of $L|K$ contained in $B$, with $d =
-  d(\alpha_1,\ldots,\alpha_n)$. Then
+  Let $(\alpha_i)$ be a basis of $\ringExtension L K$ contained in $B$, with $d
+  = d(\alpha_1,\ldots,\alpha_n)$. Then
   \[ dB \subseteq A\alpha_1 + \cdots + A\alpha_n. \]
 \end{lemma}
 
 \begin{prop}
-  If $L|K$ is separable and $A$ is a PID, every finitely generated $B$-submodule
-  $M\ne 0$ of $L$ s a free $A$-module of rank $[L:K]$.
+  If $\ringExtension L K$ is separable and $A$ is a PID, every finitely
+  generated $B$-submodule $M\ne 0$ of $L$ s a free $A$-module of rank $[L:K]$.
 \end{prop}
 \begin{corollary}
   $B$ admits an integral basis over $A$.
 \end{corollary}
 
 \begin{prop}
-  Let $M|K$ and $N|K$ be two Galois extensions with $M \cap N = K$, with $m =
-  [M:K]$ and $n = [N:K]$. Fix integral bases $(\alpha_i)_{1 \le i \le m}$ of
-  $M|K$ and $(\beta_j)_{1 \le j \le n}$ of $N|K$ respectively, with
-  discriminants $\mu$ and $\nu$ respectively. If $\mu$ and $\nu$ are relatively
-  prime, with $x\mu+y\nu = 1$ for some $x,y\in A$, then $(\alpha_i\beta_j)$ is
-  an integral basis of $MN$, with discriminant $m^\nu n^\mu$.
+  Let $\ringExtension M K$ and $\ringExtension N K$ be two Galois extensions
+  with $M \cap N = K$, with $m = [M:K]$ and $n = [N:K]$. Fix integral bases
+  $(\alpha_i)_{1 \le i \le m}$ of $\ringExtension M K$ and $(\beta_j)_{1 \le j
+    \le n}$ of $\ringExtension N K$ respectively, with discriminants $\mu$ and
+  $\nu$ respectively. If $\mu$ and $\nu$ are relatively prime, with $x\mu+y\nu =
+  1$ for some $x,y\in A$, then $(\alpha_i\beta_j)$ is an integral basis of $MN$,
+  with discriminant $m^\nu n^\mu$.
 \end{prop}
 
 % \begin{exercise}
