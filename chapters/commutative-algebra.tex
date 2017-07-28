@@ -6,7 +6,7 @@
 \begin{prop}%
   \label{prop:preimage-of-prime-is-prime}
   The preimage of a prime ideal is also a prime ideal: given a ring map $\phi :
-  A \to B$ and a prime ideal $I \subset B$, $\phi^{-1}(I) \subset A$ is also
+  A \to B$ and a prime ideal $I \subset B$, $\inv\phi(I) \subset A$ is also
   prime.
 \end{prop}
 \begin{proof}
@@ -35,14 +35,14 @@
 \begin{prop}
   Let $I$ be an ideal of $A$. Consider the natural map
   \[\pi : A \to A/I.\]
-  Show that $\pi^{-1}$ gives an inclusion-preserving bijection between prime
+  Then $\inv\pi$ gives an inclusion-preserving bijection between prime
   ideals of $A/I$ and prime ideals of $A$ containing $I$.
 \end{prop}
 \begin{proof}
   For one inclusion, we apply \Cref{prop:preimage-of-prime-is-prime}, noting
   that (after convincing oneself that the map preserves inclusions) the preimage
   of a prime ideal $P \subset A/I$ must contain $I$ since $(0) \subset P$ and
-  $\pi^{-1}((0)) = I$.
+  $\inv\pi((0)) = I$.
 \end{proof}
 
 \section{Tensor products of modules}
