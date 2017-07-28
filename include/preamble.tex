@@ -1,12 +1,12 @@
-\documentclass[a4paper,14pt,oneside]{memoir}
+\documentclass[a4paper,oneside]{memoir}
 
 % \pdfcompresslevel=0
 % \pdfobjcompresslevel=0
 
 % Layout
 
-\setulmarginsandblock{2cm}{2cm}{*}
-\setlrmarginsandblock{1cm}{1cm}{*}
+\setulmarginsandblock{3cm}{3cm}{*}
+\setlrmarginsandblock{2cm}{2cm}{*}
 \checkandfixthelayout
 
 \usepackage{amsmath,amssymb,amsfonts,mathrsfs,amsthm}
@@ -22,6 +22,11 @@
     citecolor={blue},
     urlcolor={blue}
 }
+\usepackage{makeidx}
+\usepackage[intoc]{nomencl}
+
+\makeindex
+\makenomenclature
 
 \usetikzlibrary{cd}
 
@@ -39,13 +44,39 @@
 % \pagecolor[rgb]{0.15,0.15,0.18}
 % \color[rgb]{0.9,0.9,0.9}
 
+%%%
 % Use AMS Euler for \lim and so on
+%%%
 
+% \makeatletter
+% \def\operator@font{\mathsf}
+% \makeatother
+\DeclareFontFamily{OT1}{slmss}{}
+\DeclareFontShape{OT1}{slmss}{m}{n}
+     {<-8.5> s*[1.0] rm-lmss8
+      <8.5-9.5> s*[1.0] rm-lmss9
+      <9.5-11> s*[1.0] rm-lmss10
+      <11-15.5> s*[1.0] rm-lmss12
+      <15.5-> s*[1.0] rm-lmss17
+     }{}
+\DeclareSymbolFont{sfoperators}{OT1}{slmss}{m}{n}
+\DeclareSymbolFontAlphabet{\mathsf}{sfoperators}
 \makeatletter
-\def\operator@font{\mathnormal}
+\def\operator@font{\mathgroup\symsfoperators}
 \makeatother
+
+
+% Alternative: 
+% https://tex.stackexchange.com/questions/43131/the-font-of-operator-names
+% \DeclareSymbolFont{sfoperators}{OT1}{cmss}{m}{n}
+% \DeclareSymbolFontAlphabet{\mathsf}{sfoperators}
+
+% \makeatletter
+% \def\operator@font{\mathgroup\symsfoperators}
+% \makeatother
 
 % \maxsecnumdepth{subsection}
 
-\setsubsecheadstyle{\centering\large\bfseries}
-\settocdepth{subsection}
+\setsecheadstyle{\Large\bfseries}
+\setsubsecheadstyle{\centering\Large\bfseries}
+% \settocdepth{subsection}

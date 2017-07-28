@@ -15,6 +15,8 @@ representable by a \emph{power series} expansion.
 \medskip\noindent This section will develop these notions, demonstrate relations
 between the two, and discuss some simple consequences of these conditions.
 
+\nomenclature{$x$}{unknown}
+
 \subsection{Initial definitions}
 
 \medskip\noindent Let $\Omega \subseteq \bc$ be an open set.
@@ -300,6 +302,7 @@ happen on the boundary circle $|z| = R$ (funny things do sometimes).
 
   Since $\rho < r$, we have $M\sum\left( \frac\rho r \right)^n < \infty$, so
   that $\sum c_nz^n$ converges uniformly on $K$.
+
 \end{proof}
 
 \begin{definition}
@@ -364,11 +367,39 @@ happen on the boundary circle $|z| = R$ (funny things do sometimes).
 
   \[ \frac{f(z+\zeta) - f(z)}{\zeta} = \sumoi{c_n\frac{{(z+\zeta-z_0)}^n-{(z-z_0)}^n}{\zeta}} \]
   
-  By \Cref{lemma:power-difference-bound},
+  Let $N>0$. By \Cref{lemma:power-difference-bound},
   \begin{align*}
     \abs{\sum_{n>N}{c_n\frac{{(z+\zeta-z_0)}^n-{(z-z_0)}^n}{\zeta}}} &\le \sum_{n>N}n\abs{c_n}{(\abs\zeta+\abs{z-z_0})}^{n-1} \\
                                                           &\le \sum_{n>N}n\abs{c_n}R_+^{n-1}
   \end{align*}
+
+  Since $R_{-} \le R \le R_+$, $\abs{z-z_0} < R_+$.
+  \begin{align*}
+    &\abs{\frac{f(z+\zeta) - f(z)}{\zeta} - \sumoi {n c_n {(z-z_0)}^{n-1}}} \\
+    &=\abs{\frac{f(z+\zeta) - f(z)}{\zeta} - \sum_{n=1}^N {n c_n {(z-z_0)}^{n-1}} - \sum_{n>N} {n c_n {(z-z_0)}^{n-1}} }\\
+    &=\abs{\sum_{n=0}^\infty c_n\frac{{(z+\zeta-z_0)}^n-{(z-z_0)}^n}{\zeta} - \sum_{n=1}^N {n c_n {(z-z_0)}^{n-1}} - \sum_{n>N} {n c_n {(z-z_0)}^{n-1}} }\\
+    &\le \sum_{n=1}^N \abs{c_n} \abs{{\frac{{(z+\zeta-z_0)}^n-{(z-z_0)}^n}{\zeta} - n {(z-z_0)}^{n-1}}} + 2\sum_{n>N} {n \abs{c_n} R_+^{n-1}}
+  \end{align*}
+
+\end{proof}
+
+\section{Contour integration}
+\label{sec:contour-integration}
+
+\begin{definition}
+  Let $\gamma : [a, b] \to \Omega \subseteq \bc$ be piecewise differentiable. The
+  length $L(\gamma)$ of $\gamma$ is
+  \[L(\gamma) := \int_a^b \abs{\gamma'(t)}\,dt \]
+\end{definition}
+
+\begin{prop}
+  Let $\Omega\subseteq\bc$ be open and $f \in C^1(\Omega)$. Let $R \subset
+  \Omega$ be a closed rectangle. Then
+  \[ \iint_R \pfrac f{\bar z}\,dx\,dy = -\frac i2 \int_{\partial R} f \, dz \]
+\end{prop}
+\begin{proof}
+  Let $R = [a, b] \times [c, d]$, with vertices $v_{1,\ldots,4}$ and sides
+  $\gamma_{1,\ldots,4}$.
 \end{proof}
 
 \section{Zeroes and poles}%
