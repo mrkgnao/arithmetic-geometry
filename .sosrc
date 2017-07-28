@@ -1,7 +1,1 @@
-- pattern: "(include|chapters)/[A-Za-z_\\-]*.(tex|bib)$"
-  commands:
-  - ./latexrun main.tex
-
-- pattern: ^main.tex$
-  commands:
-  - ./latexrun main.tex
+sosrc.yml
