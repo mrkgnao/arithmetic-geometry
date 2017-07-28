@@ -18,6 +18,10 @@
 \newtheorem{aside}[theorem]{Aside}
 \newtheorem{erratum}{Erratum}[chapter]
 \newtheorem{slogan}[theorem]{Slogan}
+\renewcommand{\theslogan}{\thesection.\Alph{slogan}}
+
+\newtheorem{example}[theorem]{Example}
+\renewcommand{\theexample}{\thesection.\Alph{example}}
 
 \newtheorem{exercise}{Exercise}[chapter]
 \renewcommand{\theexercise}{\thesection.\Alph{exercise}}
@@ -119,6 +123,8 @@
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
 
+\newcommand{\divides}[2]{#1 \mathop{|} #2}
+
 \newcommand{\newTerm}[1]{\emph{#1}\xspace}
 
 \newcommand{\ringExtension}[2]{#1 \mathop{|} #2}
@@ -154,3 +160,7 @@
 \let\Tr\traceInFieldExtensionLK
 \let\Trm\traceMapInFieldExtensionLK
 \let\Trmg\traceMapInFieldExtension
+
+\newcommand{\ringOfDualNumbersOver}[1]{{#1}[\epsilon]/(\epsilon^2)}
+\newcommand{\ringOfDualNumbersOverk}[0]{\ringOfDualNumbersOver{k}}
+\let\dualk\ringOfDualNumbersOverk
