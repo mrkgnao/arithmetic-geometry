@@ -1,5 +1,50 @@
 \chapter{Commutative algebra}
 
+\section{Rings}
+\label{sec:rings}
+
+\begin{prop}%
+  \label{prop:preimage-of-prime-is-prime}
+  The preimage of a prime ideal is also a prime ideal: given a ring map $\phi :
+  A \to B$ and a prime ideal $I \subset B$, $\phi^{-1}(I) \subset A$ is also
+  prime.
+\end{prop}
+\begin{proof}
+  Let $J = \phi^{-1}(I)$, and consider $xy \in J$. Then $\phi(xy) =
+  \phi(x)\phi(y) \in I$, so either $\phi(x) \in I$ or $\phi(y) \in I$, which in
+  turn tells us that either $x \in J$ or $y \in J$.
+\end{proof}
+
+\begin{prop}%
+  \label{prop:surjective-image-of-prime-is-prime}
+  The surjective image of a prime ideal is also a prime ideal: given a
+  surjective ring morphism $\sigma : A \twoheadrightarrow B$ and a prime ideal
+  $I \subset A$, $\sigma(I) \subset B$ is also prime.
+\end{prop}
+\begin{proof}
+  Let $J = \sigma(I)$, and consider $xy \in J$. By surjectivity, there exist $a$
+  and $b$ such that
+  \begin{align*}
+    \sigma(a) &= x\\
+    \sigma(b) &= y
+  \end{align*}
+  yielding $\sigma(ab) = xy$. Then $ab \in I$, which implies that (wlog) $a \in
+  I$ since $I$ is prime. Then $\sigma(a) = x \in J$, so that $J$ is also prime.
+\end{proof}
+
+\begin{prop}
+  Let $I$ be an ideal of $A$. Consider the natural map
+  \[\pi : A \to A/I.\]
+  Show that $\pi^{-1}$ gives an inclusion-preserving bijection between prime
+  ideals of $A/I$ and prime ideals of $A$ containing $I$.
+\end{prop}
+\begin{proof}
+  For one inclusion, we apply \Cref{prop:preimage-of-prime-is-prime}, noting
+  that (after convincing oneself that the map preserves inclusions) the preimage
+  of a prime ideal $P \subset A/I$ must contain $I$ since $(0) \subset P$ and
+  $\pi^{-1}((0)) = I$.
+\end{proof}
+
 \section{Tensor products of modules}
 \label{sec:tensor-products-of-modules}
 
