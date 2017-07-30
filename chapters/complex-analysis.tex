@@ -15,8 +15,6 @@ representable by a \emph{power series} expansion.
 \medskip\noindent This section will develop these notions, demonstrate relations
 between the two, and discuss some simple consequences of these conditions.
 
-\nomenclature{$x$}{unknown}
-
 \subsection{Initial definitions}
 
 \medskip\noindent Let $\Omega \subseteq \bc$ be an open set.
@@ -324,7 +322,7 @@ happen on the boundary circle $|z| = R$ (funny things do sometimes).
 
 \end{proof}
 
-\subsubsection{Derivatives of power series}
+\subsection{Derivatives of power series}
 
 \begin{lemma}%
   \label{lemma:power-difference-bound}
@@ -392,7 +390,7 @@ happen on the boundary circle $|z| = R$ (funny things do sometimes).
   \[L(\gamma) := \int_a^b \abs{\gamma'(t)}\,dt \]
 \end{definition}
 
-\begin{prop}
+\begin{prop}[Stokes' theorem-ish]
   Let $\Omega\subseteq\bc$ be open and $f \in C^1(\Omega)$. Let $R \subset
   \Omega$ be a closed rectangle. Then
   \[ \iint_R \pfrac f{\bar z}\,dx\,dy = -\frac i2 \int_{\partial R} f \, dz \]

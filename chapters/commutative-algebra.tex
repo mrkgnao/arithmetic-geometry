@@ -22,8 +22,9 @@
   $I \subset A$, $\sigma(I) \subset B$ is also prime.
 \end{prop}
 \begin{proof}
-  Let $J = \sigma(I)$, and consider $xy \in J$. By surjectivity, there exist $a$
-  and $b$ such that
+  This is a simple variant of the argument for
+  \Cref{prop:preimage-of-prime-is-prime}. Let $J = \sigma(I)$, and consider $xy
+  \in J$. By surjectivity, there exist $a$ and $b$ such that
   \begin{align*}
     \sigma(a) &= x\\
     \sigma(b) &= y
@@ -33,17 +34,26 @@
 \end{proof}
 
 \begin{prop}
+  \label{prop:inclusion-preserving-bijection-quotient}
   Let $I$ be an ideal of $A$. Consider the natural map
   \[\pi : A \to A/I.\]
-  Then $\inv\pi$ gives an inclusion-preserving bijection between prime
-  ideals of $A/I$ and prime ideals of $A$ containing $I$.
+  Then $\inv\pi$ gives an inclusion-preserving bijection between prime ideals of
+  $A/I$ and prime ideals of $A$ containing $I$.
 \end{prop}
 \begin{proof}
+  This is one form of the third isomorphism theorem (TODO REF).
+
+  \medskip\noindent
   For one inclusion, we apply \Cref{prop:preimage-of-prime-is-prime}, noting
   that (after convincing oneself that the map preserves inclusions) the preimage
   of a prime ideal $P \subset A/I$ must contain $I$ since $(0) \subset P$ and
-  $\inv\pi((0)) = I$.
+  $\inv\pi((0)) = I$. TODO
 \end{proof}
+
+\begin{prop}
+  The map $\phi: k[x] \to k[x,\epsilon]/(\epsilon^2)$ sending $ x \mapsto
+  x+\epsilon $ maps \[ f(x) \mapsto f(x) + \epsilon f'(x). \]
+\end{prop}
 
 \section{Tensor products of modules}
 \label{sec:tensor-products-of-modules}
