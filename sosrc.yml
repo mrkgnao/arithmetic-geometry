@@ -1,5 +1,5 @@
 - pattern: "^(main.tex)|((include|chapters)/[A-Za-z_\\-]*.(tex|bib))$"
   commands:
   - notify-send "Starting rebuild"
-  - ./latexrun main.tex
+  - latexrun main.tex
   - notify-send "Rebuild complete"
