@@ -1,1 +1,23 @@
 \chapter{Category theory}
+
+\section{Adjunctions}
+
+Consider a pair of functors between $\rc$ and $\rd$.
+\begin{align*}
+  F \colon &\rc \to        \rd\\
+           &\rc \leftarrow \rd \colon G
+\end{align*}
+
+An adjunction between $\rc$ and $\rd$ consists of natural transformations
+\begin{align*}
+  \eta \colon 1_\rc \to &G\triangleleft F\\
+                        &F\triangleleft G \to 1_\rd \colon \epsilon
+\end{align*}
+(called the \emph{unit} $\eta$ and the \emph{counit} $\epsilon$ respectively)
+
+Another definition states that $F$ and $G$ form an adjoint pair if there is an
+isomorphism
+
+\[ \rc(GY, X) \simeq \rd(Y, FX) \]
+
+natural in $X\in\rc$ and $Y\in\rd$.
