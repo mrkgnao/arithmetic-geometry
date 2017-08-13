@@ -1,5 +1,15 @@
 \chapter{Category theory}
 
+\section{(Co)limits}
+
+\begin{definition}
+  An \emph{initial object} in $\rc$ is a limit of the empty diagram in $\rc$.
+\end{definition}
+
+\begin{definition}
+  A \emph{final object} in $\rc$ is a colimit of the empty diagram in $\rc$.
+\end{definition}
+
 \section{Adjunctions}
 
 Consider a pair of functors between $\rc$ and $\rd$.
@@ -8,16 +18,25 @@ Consider a pair of functors between $\rc$ and $\rd$.
            &\rc \leftarrow \rd \colon G
 \end{align*}
 
-An adjunction between $\rc$ and $\rd$ consists of natural transformations
-\begin{align*}
-  \eta \colon 1_\rc \to &G\triangleleft F\\
-                        &F\triangleleft G \to 1_\rd \colon \epsilon
-\end{align*}
-(called the \emph{unit} $\eta$ and the \emph{counit} $\epsilon$ respectively)
+\begin{definition}
+  An adjunction between $\rc$ and $\rd$ consists of natural transformations
+  \begin{align*}
+    \eta \colon 1_\rc \to &G\triangleleft F\\
+                          &F\triangleleft G \to 1_\rd \colon \epsilon
+  \end{align*}
+  (called the \emph{unit} $\eta$ and the \emph{counit} $\epsilon$ respectively).
+\end{definition}
 
-Another definition states that $F$ and $G$ form an adjoint pair if there is an
-isomorphism
+$F$ and $G$ are said to form an \emph{adjoint pair}, and $F$ is said to be
+\emph{left adjoint} to $G$, written
+\[ F\dashv G \]
+(and $G$ is \emph{right adjoint} to $F$).
 
-\[ \rc(GY, X) \simeq \rd(Y, FX) \]
+\begin{definition}
+  Another definition states that $F$ and $G$ form an adjoint pair if there is an
+  isomorphism
 
-natural in $X\in\rc$ and $Y\in\rd$.
+  \[ \rc(GY, X) \simeq \rd(Y, FX) \]
+
+  natural in $X\in\rc$ and $Y\in\rd$.
+\end{definition}
