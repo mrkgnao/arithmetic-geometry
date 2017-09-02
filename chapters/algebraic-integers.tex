@@ -1,10 +1,10 @@
 \chapter{Algebraic integers}
 
 \epigraph{Pellentesque condimentum, magna ut suscipit hendrerit, ipsum augue
-  ornare nulla, non luctus diam neque sit amet urna.}{The Dude}
+  ornare nulla, non luctus diam neque sit amet urna.}{Someone}
 
 \section{Appetizer: Fermat's theorem on sums of two squares}%
-\label{sec:appetizer-fermat's-theorem-on-sums-of-two-squares}
+\label{sec:appetizer-fermats-theorem-on-sums-of-two-squares}
 
 \begin{question}
   Does the equation
@@ -13,12 +13,13 @@
 \end{question}
 
 \begin{paragraph}{A bit of history}
-  This post is yet another from Ye Olde Days: I found a stray {\LaTeX} file in
+  This section is salvaged from a stray {\LaTeX} file found in
   an old \texttt{/home} folder. I wrote this for a friend at Canada/USA
   Mathcamp, as part of my usual Number Theory Indoctrination™ Service.
 \end{paragraph}
 
-\medskip\noindent One start is to look at the equation mod \(4\). Since squares
+\medskip\noindent
+One start is to look at the equation mod \(4\). Since squares
 are always either \(0\) or \(1\) modulo \(4\) (work this out for yourself if
 it's not familiar) \(p\) can only be \(1\) mod \(4\). \footnote{\(0\) and \(2\)
   are, uh, not really possibilities, except in the case \(2 = 1^2 + 1^2\).}
@@ -53,15 +54,20 @@ structure of a (square) \newTerm{lattice}, which has an obvious meaning that we
 will not work hard to rigorize for now: think of the points in the plane with
 integer coordinates, where \( (x,y) \) corresponds to \( x+iy \).
 
-% <!-- Low-effort picture: --> <!-- \begin{tikzpicture} --> <!-- \begin{scope}
-%     --> <!-- \clip (-5,-5) rectangle (4cm,4cm); % Clips the picture... -->
-%     <!-- \draw[style=help lines,dashed] (-14,-14) grid[step=2cm]
-%     (14,14); % Draws a grid in the new coordinates. -->
-%     <!-- \foreach \x in {-7,-6,...,7}{ % Two indices running over each -->
-%     <!-- \foreach \y in {-7,-6,...,7}{ % node on the grid we have drawn -->
-%     <!-- \node[draw,circle,inner sep=2pt,fill] at (2\newTerm{\x,2}\y)
-%     {}; % Places a dot at those points -->
-%     <!-- } --> <!-- } --> <!-- \end{scope} --> <!-- \end{tikzpicture} -->
+\begin{figure}
+  \centering
+  \begin{tikzpicture}   
+    \begin{scope}
+      \clip (-5,-5) rectangle (5cm,5cm); % Clips the picture... 
+      \draw[style=help lines,dashed] (-14,-14) grid[step=2cm] (14,14); 
+      \foreach \x in {-7,-6,...,7}{ % Two indices running over each 
+        \foreach \y in {-7,-6,...,7}{ % node on the grid we have drawn 
+          \node[draw,circle,inner sep=2pt,fill] at (2*\x,2*\y) {};
+        }
+      }   
+    \end{scope}   
+  \end{tikzpicture} 
+\end{figure}
 
 \begin{aside}
   This has very deep applications once we start considering more interesting
@@ -237,8 +243,8 @@ Now we are ready to prove the main theorem. We restate it here:
   \), and we're done.
 
   But for primes congruent to \(1\) modulo \(4\), we have our lemma which states
-  that there exists \(x\) such that \(x^2+1\equiv 0\Mod 4\). So \(p|x^2+1 =
-  (x+i)(x-i)\), but it does not divide either of the factors on the right (it
+  that there exists \(x\) such that \(x^2+1\equiv 0\Mod 4\). So \(\divides p {x^2+1 =
+  (x+i)(x-i)}\), but it does not divide either of the factors on the right (it
   doesn't divide either of their imaginary parts). So \(p\) is not prime in
   \({\mathbf Z}[i]\).
 
@@ -251,9 +257,27 @@ Now we are ready to prove the main theorem. We restate it here:
   in \({\mathbf Z}[i]\), and we're done.
 \end{proof}
 
-\section{Integral closure}
-
 \section{Integrality}
+
+Let $\ringExtension A B$ be an extension of rings.
+
+\begin{definition}
+  An element $b \in B$ is called integral over $A$ if it satisfies a monic equation
+  \[ x^n + a_{n-1}x^{n-1} + \cdots + a_0 = 0 \]
+  with $a_i \in A$.
+\end{definition}
+
+\begin{definition}
+  $B$ is integral over $A$ if all $b\in B$ are integral over $A$.
+\end{definition}
+
+\begin{definition}
+  The characteristic polynomial of an element $\alpha$ will be denoted $\chi_\alpha$.
+\end{definition}
+
+\begin{definition}
+  The minimal polynomial of an element $\alpha$ will be denoted $\mu_\alpha$.
+\end{definition}
 
 \subsection{The setup}
 Fix a domain $A$ integrally closed in $K := K(A)$. Let $\ringExtension L K$ be a
@@ -269,17 +293,48 @@ finite extension, and $B$ the integral closure of $A$ in $L$. This is the
 
 \subsection{Basic properties}
 
-Integrality is stable under the ring operations: one would like the following to
-hold, and they do:
+Integrality is stable under the ring operations: one would like the integrality
+of $a$ and $b$ to imply the integrality of $a + b$ and $ab$. This does hold,
+and we will be able to see it once we recast the notion of integrality in terms
+of commutative algebra.
 
-This is a corollary of the following:
+\begin{lemma}
+  Let $A = (a_{ij})$ be an $r\times r$ matrix over a ring $R$, and let \[A^\ast
+  = ({a_{ij}}^\ast) = ((-1)^{i+j} \det A_{ij})\] be the cofactor matrix of $A$.
+  Writing $\Delta$ for $\det A$, \[A{A^\ast} = {A^\ast}A = \Delta I_r \] which
+  implies that, given $x = (x_1,\ldots,x_r)$, \[Ax = 0 \implies \Delta x = 0.\]
+\end{lemma}
 
-\begin{theorem}[Module-theoretic characterization of integrality]{\label{module-integrality}}
+\begin{theorem}[Integrality and finiteness]{\label{module-integrality}}
   A finite number of $b_i$ are integral over $A$ $\iff$ the ring
   $A[b_1,\ldots,b_n]$ is finitely generated as an $A$-module.
 \end{theorem}
 \begin{proof}
-  TODO.
+  Let $b\in B$ be integral over $A$, with $\beta(x) \in A[x]$ a monic
+  polynomial of degree $n$ satisfying $\beta(b) = 0$. For arbitrary $f\in
+  A[x]$, we can use the division algorithm in $A[x]$ to get \[f = g\beta + r,\]
+  where $\rho := \deg r < n$.  Then \[f(b) = g(b)\beta(b) + r(b) = r(b) =
+  a_\rho b^\rho + \cdots + a_0\] so $A[b]$ is generated as an $A$-module by $1,
+  b, \ldots, b^\rho$.
+
+  \medskip\noindent For the converse, let $B$ be a finitely generated
+  $A$-module with generators $t_1,\ldots,t_n$. Any $\lambda \in B$ satisfies \[
+  \lambda t_i = \sum_j a_{ij} t_j \] for some coefficients $a_{ij} \in A$.
+  Writing $A = (a_{ij})$ and $t = (t_1,\ldots,t_r)$, $(\lambda
+  t_1,\ldots,\lambda t_r) = \lambda t$ and \[ \left( \sum_j a_{1j} t_j, \cdots,
+  \sum_j a_{rj} t_j \right) = At \]
+  which gives
+  \[ (\lambda I_r - A)t = 0 \]
+  implying, by our lemma, that
+  \begin{equation}%
+    \label{integrality-finiteness-penult-eqn}
+    \det(\lambda I_r - A) \cdot t_i = 0 
+  \end{equation}
+  for all $i$. Now, we know that the $t_i$ form a generating set, so, in
+  particular, $1$ can be written as a linear combination of the $t_i$. This
+  allows us to combine the system of equations
+  \ref{integrality-finiteness-penult-eqn} into \[\det(\lambda I_r - A) = 0 \]
+  which is a monic equation for $\lambda$ over $A$. (Isn't this $\chi_A(\lambda)$?)
 \end{proof}
 
 \begin{corollary}{\label{integrality-of-sums-products}}
@@ -291,11 +346,22 @@ This is a corollary of the following:
   and $B \subseteq C$ integral $\iff$ $A \subseteq C$ integral.
 \end{theorem}
 \begin{proof}
-  $A \subseteq C$ integral implies $A \subseteq B$ integral. (Why?)
+  $A \subseteq C$ integral implies $A \subseteq B$ integral, since every
+  element of $B$ is an element of $C$. Similarly, since every element $c\in C$
+  satisfies a monic polynomial in $A[x]$ and $A[x] \subseteq B[x]$, it also
+  implies $B \subseteq C$ integral. Hence the integrality of the composite
+  extension $A\subseteq C$ implies that the subextensions are also integral.
+
+  \medskip\noindent Conversely, let $c\in C$ satisfy \[ c^n + b_{n-1}c^{n-1} +
+  \cdots + b_0 = 0 \] where $b_i\in B$. Let $R = A[b_1,\cdots,b_n]$. Then
+  $R \subseteq {R[c]}$ is finite since $c$ is integral over $A$, and
+  $A \subseteq R$ is finite since $A \subseteq B$ is. Hence the
+  composite extension $A \subseteq R[c]$ is finitely generated as an
+  $A$-module and is thus integral.
 \end{proof}
 
 \begin{theorem}
-  Any element $l \in L$ is equal to $b/a$ for $b \in B$ and $a \in A$.
+  Any element $l \in L$ can be expressed as $b/a$ for some $b \in B$ and $a \in A$.
 \end{theorem}
 
 \begin{proof}
@@ -320,10 +386,10 @@ This is a corollary of the following:
 \end{theorem}
 
 \begin{proof}
-  If $\mu := \mu_l \in A[x]$ then we have integrality of $l$ over $A$ by
+  If $\mu := \mu_l \in A[x]$ then the integrality of $l$ over $A$ follows from the
   definition. Consider now the case of an integral $l$ with minimal polynomial
   $\mu \in K[x]$. From integrality over $A$ we know that $l$ is a root of some
-  $g \in A[x]$. Then $\mu | g$ in $K[x]$, so all zeros of $\mu$ are zeros of $g$
+  $g \in A[x]$. Then $\divides \mu g$ in $K[x]$, so all zeros of $\mu$ are zeros of $g$
   and hence integral over $A$.
 
   \npar By Viet\`a, the coefficients $a_i$ are given by elementary symmetric
@@ -379,11 +445,11 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 
 \begin{theorem}{\label{mul-trace-norm}}
   For a tower of finite extensions $K \subseteq L \subseteq M$, we have
+
   \begin{alignat*}{2}
     \Trmg L K &\circ \Trmg M L &&= \Trmg M K\\
     \Nmmg L K &\circ \Nmmg M L &&= \Nmmg M K
   \end{alignat*}
-  $\cos x$
 \end{theorem}
 
 \section{Integral bases}
@@ -398,9 +464,8 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 
 \begin{prop}{\label{trace-form-bilinear}}
   For $\ringExtension L K$ a separable extension with basis $\alpha_i$, the
-  function
-  \[(x,y) = \Tr{xy}\] yields a nondegenerate bilinear form on the $K$-vector
-  space $L$.
+  function \[(x,y) = \Tr{xy}\] yields a nondegenerate bilinear form on the
+  $K$-vector space $L$.
 \end{prop}
 
 \begin{corollary} For $\ringExtension L K$ and $\alpha_i$ as above,
@@ -408,16 +473,16 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 \end{corollary}
 
 \begin{proof}
-  The form has matrix
-  \[ M = \Tr {(\alpha_i\alpha_j)} \] with respect to the given basis. The
-  nondegeneracy of the form, which we have from \Cref{trace-form-bilinear}, is
-  equivalent to the statement that $\det M \ne 0$, whence the claim follows.
+  The form has matrix \[ M = \Tr {(\alpha_i\alpha_j)} \] with respect to the
+  given basis. The nondegeneracy of the form, which we have from
+  \Cref{trace-form-bilinear}, is equivalent to the statement that $\det M \ne
+  0$, whence the claim follows.
 \end{proof}
 
 \begin{lemma}
   Let $(\alpha_i)$ be a basis of $\ringExtension L K$ contained in $B$, with $d
-  = d(\alpha_1,\ldots,\alpha_n)$. Then
-  \[ dB \subseteq A\alpha_1 + \cdots + A\alpha_n. \]
+  = d(\alpha_1,\ldots,\alpha_n)$. Then \[ dB \subseteq A\alpha_1 + \cdots +
+  A\alpha_n. \]
 \end{lemma}
 
 \begin{prop}
@@ -432,10 +497,10 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
   Let $\ringExtension M K$ and $\ringExtension N K$ be two Galois extensions
   with $M \cap N = K$, with $m = [M:K]$ and $n = [N:K]$. Fix integral bases
   $(\alpha_i)_{1 \le i \le m}$ of $\ringExtension M K$ and $(\beta_j)_{1 \le j
-    \le n}$ of $\ringExtension N K$ respectively, with discriminants $\mu$ and
-  $\nu$ respectively. If $\mu$ and $\nu$ are relatively prime, with $x\mu+y\nu =
-  1$ for some $x,y\in A$, then $(\alpha_i\beta_j)$ is an integral basis of $MN$,
-  with discriminant $m^\nu n^\mu$.
+  \le n}$ of $\ringExtension N K$ respectively, with discriminants $\mu$ and
+  $\nu$ respectively. If $\mu$ and $\nu$ are relatively prime, with $x\mu+y\nu
+  = 1$ for some $x,y\in A$, then $(\alpha_i\beta_j)$ is an integral basis of
+  $MN$, with discriminant $m^\nu n^\mu$.
 \end{prop}
 
 % \begin{exercise}
