@@ -279,18 +279,6 @@ Let $\ringExtension A B$ be an extension of rings.
   The minimal polynomial of an element $\alpha$ will be denoted $\mu_\alpha$.
 \end{definition}
 
-\subsection{The setup}
-Fix a domain $A$ integrally closed in $K := K(A)$. Let $\ringExtension L K$ be a
-finite extension, and $B$ the integral closure of $A$ in $L$. This is the
-\newTerm{$AKLB$ diagram}:
-
-\[
-  \begin{tikzcd}
-    K \arrow[r, hook] & L \\
-    A \arrow[u] \arrow[r] & B \arrow[u]
-  \end{tikzcd}
-\]
-
 \subsection{Basic properties}
 
 Integrality is stable under the ring operations: one would like the integrality
@@ -360,19 +348,52 @@ of commutative algebra.
   $A$-module and is thus integral.
 \end{proof}
 
-\begin{theorem}
-  Any element $l \in L$ can be expressed as $b/a$ for some $b \in B$ and $a \in A$.
-\end{theorem}
+\subsection{Integral closures}
 
+\begin{definition}
+  Given a ring extension $A \subseteq B$, the \newTerm{integral closure} $\bar A$
+  is the ring consisting of elements $b\in B$ integral over $A$.
+\end{definition}
+
+\begin{definition}
+  The integral closure of an integral domain $A$ in its field of fractions
+  $K(A)$ is called the \newTerm{normalization} of $A$.
+\end{definition}
+
+\begin{definition}
+  If $\bar A = A$ in the extension $A \subseteq B$, $A$ is said to be
+  \newTerm{integrally closed} in B.
+\end{definition}
+
+When the data of $B$ is omitted, as in ``$A$ is integrally closed'', one takes $B = K(A)$.
+
+\begin{prop}
+  UFDs are integrally closed.
+\end{prop}
 \begin{proof}
-  Consider an element $l \in L$. The minimal polynomial $m_l$ of $l$ over $K$
-  gives rise to a polynomial over $A$
-  \[ a_nl^n + a_{n-1}l^{n-1} + \cdots + a_0 = 0 \] by clearing denominators. Now
-  observe that $\ell := a_nl$ is integral over $A$: multiplying by $a_n^{n-1}$
-  gives an equation of the form
-  \[ \ell^n + a_{n-1}'\ell^{n-1} + \cdots + a_0' = 0. \] This shows that taking
-  $b/a$ = $\ell/a_n$ works.
+  Let $p/q$ be a reduced fraction in $K(A)$ integral over $A$:
+  \[ (p/q)^n + a_{n-1}(p/q)^{n-1} + \cdots + a_0 = 0 \]
+  Clearing denominators yields
+  \[ p^n     + a_{n-1} q p^{n-1}  + \cdots + q^n a_0 = 0 \]
+  which gives $\divides q p$. This implies, by the hypothesis that the fraction was in lowest terms,
+  that $q = 1$. So $p/q = p$ is an element of $A$.
 \end{proof}
+
+\medskip\noindent
+Fix a domain $A$ integrally closed in $K := K(A)$. Let $\ringExtension L K$ be a
+finite extension, and $B$ the integral closure of $A$ in $L$. This is the
+\newTerm{$AKLB$ diagram}:
+
+\[
+  \begin{tikzcd}
+    K \arrow[r, hook] & L \\
+    A \arrow[u] 
+      \arrow[r]       & B \arrow[u]
+  \end{tikzcd}
+\]
+
+Many of our results will seek to describe how certain properties behave under
+the maps in the diagram.
 
 \begin{remark}
   Notice that $K(B) = L$. Indeed, $B \subset L$ so $K(B) \subset L$, and the
@@ -381,23 +402,45 @@ of commutative algebra.
 \end{remark}
 
 \begin{theorem}
-  $l \in L$ is integral over $A$ iff its minimal polynomial $\mu_l$ over $K$ has
-  coefficients in $A$.
+  Any element $l \in L$ can be expressed as $b/a$ for some $b \in B$ and $a \in A$.
 \end{theorem}
 
 \begin{proof}
-  If $\mu := \mu_l \in A[x]$ then the integrality of $l$ over $A$ follows from the
-  definition. Consider now the case of an integral $l$ with minimal polynomial
-  $\mu \in K[x]$. From integrality over $A$ we know that $l$ is a root of some
-  $g \in A[x]$. Then $\divides \mu g$ in $K[x]$, so all zeros of $\mu$ are zeros of $g$
-  and hence integral over $A$.
-
-  \npar By Viet\`a, the coefficients $a_i$ are given by elementary symmetric
-  polynomials in the roots and are hence, by
-  \Cref{integrality-of-sums-products}, integral over $A$ themselves. The $a_i$
-  are elements of $K$, so, in this case, integrality over $A$ means that $a_i
-  \in K$, and hence $\mu \in A[x]$.
+  Consider an element $l \in L$. The minimal polynomial $\mu_l$ of $l$ over $K$
+  gives rise to a polynomial over $A$
+  \[ a_nl^n + a_{n-1}l^{n-1} + \cdots + a_0 = 0 \] by clearing denominators. Now
+  observe that $\ell := a_nl$ is integral over $A$: multiplying by $a_n^{n-1}$
+  gives an equation of the form
+  \[ \ell^n + a_{n-1}'\ell^{n-1} + \cdots + a_0' = 0. \] This shows that taking
+  $b/a$ = $\ell/a_n$ works.
 \end{proof}
+
+\begin{theorem}
+  $l \in L$ is integral over $A$ iff its minimal polynomial $\mu_l$ over $K$ has
+  coefficients in $A$.
+\end{theorem} 
+
+\begin{proof}
+  If $\mu := \mu_l(x)$ has coefficients in $A[x]$ then the integrality of $l$
+  over $A$ follows from the definition (recall that minimal polynomials are
+  monic). 
+  
+  \medskip\noindent Consider now the case of an integral element $l$ with
+  minimal polynomial $\mu \in K[x]$. From integrality over $A$ we know that $l$
+  is a root of some $g(x) \in A[x]$. Then $\divides \mu g$ in $K[x]$, so all
+  zeros of $\mu$ are zeros of $g$ and hence integral over $A$.  \npar By
+  Viet\`a, the coefficients $a_i$ are given by elementary symmetric polynomials
+  in the roots and are hence, by \Cref{integrality-of-sums-products}, integral
+  over $A$ themselves. Since the $a_i$ are elements of $K$, their integrality
+  implies that they are actually elements of $A$.
+\end{proof}
+
+\begin{remark}
+  It might bear explaining why the last step of the proof makes sense: why does
+  the integrality of the $a_i$ over $A$ mean that they are actually elements of
+  $A$? Every $A$-fraction $p/q$ satisfies a linear polynomial $qx-p = 0$, whose
+  monicity gives $q = 1$, implying $p/q = p \in A$. 
+\end{remark}
 
 \section{The trace and the norm}
 
@@ -412,7 +455,7 @@ trace and norm maps
 Let $n = \fieldExtensionDegree L K$. The characteristic polynomial
 \begin{align*}
   \chi_z(t) &= \det (tI - T_z)\\
-            &= t^n - a_1t^{n-1} + \cdots + (-1)^n a_n \in K[i]
+            &= t^n - a_1t^{n-1} + \cdots + (-1)^n a_n \in K[t]
 \end{align*}
 
 contains coefficients $a_1 = \Tr z$ and $a_n = \Nm z$.
@@ -421,6 +464,14 @@ contains coefficients $a_1 = \Tr z$ and $a_n = \Nm z$.
   If this isn't immediately clear, think Viet\`a. (This will be one of the
   recurring themes throughout this chapter.)
 \end{remark}
+
+Since $T_{x+y} = T_x + T_y$ and $T_{xy}$ = $T_x \triangleleft T_y$, the trace and norm are
+in fact homomorphisms
+
+\begin{alignat*}{2}
+  \Trm &: L      &&\to K \\
+  \Nmm &: L^\ast &&\to K^\ast
+\end{alignat*}
 
 \section{Galois-theoretic interpretations}
 
@@ -437,10 +488,94 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 \end{prop}
 
 \begin{proof}
-  Let $d=[L:K(x)]$. The characteristic polynomial is a power
-  \[\chi_z = \mu_z^d \]
-  where $d=[L:K(z)]$. Part \ref{chi-z-product-exp} easily implies the others, by
-  Viet\`a's formulas.
+  Let $d=[L:K(z)]$. The characteristic polynomial is a power \[\chi_z = \mu_z^d
+  \] of the minimal polynomial \[ \mu_z(t) = t^m + c_1 t^{m-1} + \cdots + c_m
+  \] of $z$. To prove this, we consider the basis $x^0, x^1, \ldots, x^{m-1}$ of
+  $\ringExtension {K(z)} K$. If $\alpha_1, \ldots, \alpha_d$ is a basis for
+  $\ringExtension L {K(z)}$, then the $dm$ elements 
+
+  \[
+    \begin{array}{cccc}
+      \alpha_1 &\alpha_1 x &\ldots &\alpha_1 {x^{m-1}} \\
+      \alpha_2 &\alpha_2 x &\ldots &\alpha_2 {x^{m-1}} \\
+      \vdots   &\vdots     &\ddots &\vdots \\
+      \alpha_d &\alpha_d x &\ldots &\alpha_d {x^{m-1}} 
+    \end{array}
+  \]
+
+  form a basis $\hb$ for the extension $\ringExtension L K$. The action of $T_x$ on each row
+  is 
+
+  \begin{alignat*}{2}
+    &\alpha_i         &&\mapsto \alpha_i x \\
+    &\alpha_i x       &&\mapsto \alpha_i x^2 \\
+    &{}               &&\cdots\\
+    &\alpha_i x^{m-2} &&\mapsto \alpha_i x^{m-1} \\
+    &\alpha_i x^{m-2} &&\mapsto \alpha_i x^{m-1} \\
+    &\alpha_i x^{m-1} &&\mapsto \alpha_i x^m \\
+    &{}               &&= -\alpha_i (c_1 x^{m-1} + \cdots + c_m) \\
+    &{}               &&= \sum_{j=1}^{m-1} (-c_j) (\alpha_i x^{m-j})
+  \end{alignat*}
+
+  Now we can write the matrix of $T_x$ with respect to $\hb$. It will only have
+  blocks along the diagonal: each will correspond to an $\alpha_i$, and they
+  will all be identical and equal to
+
+  \[ M_z =
+  \begin{bmatrix}
+    0      & 1        & 0        & \cdots & 0 \\
+    0      & 0        & 1        & \cdots & 0 \\
+    \vdots & \vdots   & \vdots   & \ddots & \vdots \\
+    0      & 0        & 0        & \cdots & 1 \\
+    -c_m   & -c_{m-1} & -c_{m-2} & \cdots & -c_1
+  \end{bmatrix}
+  \]
+
+  The characteristic polynomial of $M_z$ is just $\mu_z(t)$, and there are $d$ such blocks, so that 
+  \[ \chi_z(t) = \det(tI - T_z) = (\det (tI - M_z))^d = \mu_z(t)^d. \]
+
+  We need a short Galois-theoretic lemma here.
+  
+  \begin{lemma}
+  The set $\hom_K(L,\bar K)$ is partitioned by the equivalence relation \[ \sigma \sim \tau \iff \sigma x = \tau x \]
+  into $m$ equivalence classes of $d$ elements each.
+  \end{lemma}
+
+  \begin{proof}
+  There are $n$ $K$-embeddings of a degree-$n$ separable extension
+  $\ringExtension L K$ into $\bar K$, by the primitive element theorem.
+  Applying this in turn to the extensions $\ringExtension L K$ and
+  $\ringExtension L {K(z)}$, we find that there are
+  
+  \begin{itemize} 
+    \item $md$ embeddings $L \hookrightarrow \bar K$ that fiz $K$ 
+    \item $d$ embeddings $L \hookrightarrow \bar K$ that fiz $K(z)$;
+      equivalently, these are $K$-embeddings that also fiz the element $z\in L$ 
+  \end{itemize}
+
+  Each of the $md$ $K$-embeddings $\sigma \in {\mathrm{Hom}}_K(L,\bar K)$ is a
+  member of an equivalence class corresponding to a choice $z_i = \sigma z$ of
+  a conjugate of $z$ to generate $K(z)$ with (there are $m$ of those). For
+  every such conjugate, the equivalence class comprises $d$ $K(z_i)$-embeddings
+  of $L$ into $\bar K$.
+
+  Note that the second point uses the fact that the algebraic closure
+  ${K(x)}^{\mathrm{alg}} = K^{\mathrm{alg}} = \bar K$.
+  \end{proof}
+
+  Now we are free to choose a system of representatives $\sigma_1,\ldots,\sigma_m$ and write
+  \[ \mu_z(t) = \prod_{i=1}^m (t - \sigma_i z) \]
+
+  and, further,
+
+  \begin{align*}
+    \chi_z(t) = (\mu_z(t))^d &= \prod_{i=1}^m (t-\sigma_i z)^d \\
+                             &= \prod_{i=1}^m \prod_{\sigma\sim\sigma_i} (t-\sigma_i) \\
+                             &= \prod_{\sigma} (t-\sigma z)
+  \end{align*}
+  
+  This proves \Cref{chi-z-product-exp}, which easily implies the others by a
+  straightforward application of Viet\`a's formulas.
 \end{proof}
 
 \begin{theorem}{\label{mul-trace-norm}}
