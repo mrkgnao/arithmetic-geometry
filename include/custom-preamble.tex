@@ -128,7 +128,7 @@
 
 \newcommand{\newTerm}[1]{\emph{#1}\xspace}
 
-\newcommand{\ringExtension}[2]{#1 \mathop{|} #2}
+\newcommand{\ringExtension}[2]{#2 \subseteq #1}
 
 \newcommand{\ringExtensionA}[1]{\ringExtension{#1}{A}}
 \newcommand{\ringExtensionK}[1]{\ringExtension{#1}{K}}
@@ -142,8 +142,9 @@
 % Norms and traces
 %
 
-\newcommand{\normMapInFieldExtension}[2]{{\mathsf{Nm}}_{\ringExtension{#1}{#2}}}
-\newcommand{\normInFieldExtension}[3]{{\normMapInFieldExtension{#1}{#2}}\left(#3\right)}
+\newcommand{\normMapInFieldExtension}[2]{\operatorname*{\mathsf{Nm}}_{\ringExtension{#1}{#2}}}
+%\newcommand{\normInFieldExtension}[3]{{\normMapInFieldExtension{#1}{#2}}\left(#3\right)}
+\newcommand{\normInFieldExtension}[3]{{\normMapInFieldExtension{#1}{#2}}\,#3}
 
 \newcommand{\normMapInFieldExtensionLK}[0]{\normMapInFieldExtension{L}{K}}
 \newcommand{\normInFieldExtensionLK}[1]{\normInFieldExtension{L}{K}{#1}}
@@ -152,8 +153,9 @@
 \let\Nmm\normMapInFieldExtensionLK
 \let\Nmmg\normMapInFieldExtension
 
-\newcommand{\traceMapInFieldExtension}[2]{{\mathsf{Tr}}_{\ringExtension{#1}{#2}}}
-\newcommand{\traceInFieldExtension}[3]{{\traceMapInFieldExtension{#1}{#2}}\left(#3\right)}
+\newcommand{\traceMapInFieldExtension}[2]{\operatorname*{\mathsf{Tr}}_{\ringExtension{#1}{#2}}}
+%\newcommand{\traceInFieldExtension}[3]{{\traceMapInFieldExtension{#1}{#2}}\left(#3\right)}
+\newcommand{\traceInFieldExtension}[3]{{\traceMapInFieldExtension{#1}{#2}}\,#3}
 
 \newcommand{\traceMapInFieldExtensionLK}[0]{\traceMapInFieldExtension{L}{K}}
 \newcommand{\traceInFieldExtensionLK}[1]{\traceInFieldExtension{L}{K}{#1}}
@@ -174,3 +176,28 @@
 
 \newcommand{\inverse}[1]{{#1}^{-1}}
 \let\inv\inverse
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\newcommand\indexedSequence[3]{%
+  {#1_#2,\ldots,#1_#3}%
+}
+
+\newcommand\indexedSequencez[2]{\indexedSequence{#1}{0}{#2}}
+\newcommand\indexedSequencei[2]{\indexedSequence{#1}{1}{#2}}
+
+\let\iseqz\indexedSequencez
+\let\iseqi\indexedSequencei
+
+\newcommand\homFieldEmbedding[2]{\hom_#2(#1,\bar{#2})}
+\newcommand\homFieldEmbeddingK[1]{\homFieldEmbedding{#1}{K}}
+
+\let\kemb\homFieldEmbedding
+\let\kembk\homFieldEmbeddingK
+
+\newcommand\galoisGroup[2]{\mathnormal{Gal}\left(#1,#2\right)}

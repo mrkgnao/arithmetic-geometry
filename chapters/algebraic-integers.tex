@@ -537,8 +537,9 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
   We need a short Galois-theoretic lemma here.
   
   \begin{lemma}
-  The set $\hom_K(L,\bar K)$ is partitioned by the equivalence relation \[ \sigma \sim \tau \iff \sigma x = \tau x \]
-  into $m$ equivalence classes of $d$ elements each.
+  The set $\hom_K(L,\bar K)$ is partitioned by the equivalence relation \[
+  \sigma \sim \tau \iff \sigma z = \tau z \] into $m$ equivalence classes of
+  $d$ elements each.
   \end{lemma}
 
   \begin{proof}
@@ -548,19 +549,19 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
   $\ringExtension L {K(z)}$, we find that there are
   
   \begin{itemize} 
-    \item $md$ embeddings $L \hookrightarrow \bar K$ that fiz $K$ 
-    \item $d$ embeddings $L \hookrightarrow \bar K$ that fiz $K(z)$;
-      equivalently, these are $K$-embeddings that also fiz the element $z\in L$ 
+    \item $md$ embeddings $L \hookrightarrow \bar K$ that fix $K$ 
+    \item $d$ embeddings $L \hookrightarrow \bar K$ that fix $K(z)$;
+      equivalently, these are $K$-embeddings that also fix the element $z\in L$ 
   \end{itemize}
 
-  Each of the $md$ $K$-embeddings $\sigma \in {\mathrm{Hom}}_K(L,\bar K)$ is a
+  Each of the $md$ $K$-embeddings $\sigma \in \hom_K(L,\bar K)$ is a
   member of an equivalence class corresponding to a choice $z_i = \sigma z$ of
   a conjugate of $z$ to generate $K(z)$ with (there are $m$ of those). For
   every such conjugate, the equivalence class comprises $d$ $K(z_i)$-embeddings
   of $L$ into $\bar K$.
 
   Note that the second point uses the fact that the algebraic closure
-  ${K(x)}^{\mathrm{alg}} = K^{\mathrm{alg}} = \bar K$.
+  ${K(z)}^{alg} = K^{alg} = \bar K$.
   \end{proof}
 
   Now we are free to choose a system of representatives $\sigma_1,\ldots,\sigma_m$ and write
@@ -582,10 +583,34 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
   For a tower of finite extensions $K \subseteq L \subseteq M$, we have
 
   \begin{alignat*}{2}
-    \Trmg L K &\circ \Trmg M L &&= \Trmg M K\\
-    \Nmmg L K &\circ \Nmmg M L &&= \Nmmg M K
+    \Trmg L K &\triangleleft \Trmg M L &&= \Trmg M K\\
+    \Nmmg L K &\triangleleft \Nmmg M L &&= \Nmmg M K
   \end{alignat*}
 \end{theorem}
+
+\begin{proof}
+  First, we assume that $\ringExtension M K$ is separable. Let $m =
+  \fieldExtensionDegree L K$. The set $\hom_K(M,\bar K)$ is partitioned by the
+  relation \[ \sigma \sim \tau \iff \restr{\sigma}{L} = \restr{\tau}{L} \] into
+  $m$ equivalence classes (of $[M : L]$ elements each).
+
+  \medskip\noindent
+  Given representatives $\iseqi \sigma m$, the $K$-embeddings
+  of $L$ into the algebraic closure $\bar K$ are \[\kembk L = \left\{
+  \restr{\sigma_1}{L}, \ldots, \restr{\sigma_m}{L} \right\},\] and we can then
+  compute
+  \begin{align*}
+    \Trmg M K x 
+          &= \sum_{\sigma \in \kembk{M}} \sigma x \\ 
+          &= \sum_{\left[\sigma_i\right] \in \kembk{L}} 
+             \left(\sum_{\sigma \sim \sigma_i} \sigma x\right) \\
+          &= \sum_{i = 1}^m \sum_{\sigma \sim \sigma_i} \sigma x \\
+          &= \sum_{i = 1}^m \Trmg {\sigma_i M}{\sigma_i L} {\sigma_i x} \\
+          &= \sum_{i = 1}^m \sigma_i \left(\Trmg M L x\right) \\
+          &= \Trmg L K \left(\Trmg M L x\right)
+   \end{align*}
+   which is the desired expression for the trace map in $\ringExtension M K$.
+\end{proof}
 
 \section{Integral bases}
 
@@ -597,10 +622,12 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
 \end{definition}
 
 
-\begin{prop}{\label{trace-form-bilinear}}
+\begin{prop}%
+  \label{trace-form-bilinear}
+
   For $\ringExtension L K$ a separable extension with basis $\alpha_i$, the
-  function \[(x,y) = \Tr{xy}\] yields a nondegenerate bilinear form on the
-  $K$-vector space $L$.
+  function \[ \left\langle x,y\right\rangle = \Tr{xy}\] yields a nondegenerate
+  $K$-bilinear form on $L$.
 \end{prop}
 
 \begin{corollary} For $\ringExtension L K$ and $\alpha_i$ as above,
