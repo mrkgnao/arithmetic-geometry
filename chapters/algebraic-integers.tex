@@ -621,6 +621,67 @@ Fix an algebraic closure $\bar{K} = K^{alg}$ of $K$.
   $\sigma_i$ are the $K$-embeddings $L \hookrightarrow {\bar{K}}$.
 \end{definition}
 
+From the Galois-theoretic expression for the trace, we find \[ \Tr
+  \alpha_i\alpha_j = \sum_\sigma \sigma\left(\alpha_i\alpha_j\right) = \sum_k
+  (\sigma_k \alpha_i) (\sigma_k \alpha_j), \] we can write the matrix $\Tr
+  \alpha_i\alpha_j$ as a product \[ \left(\Tr \alpha_i\alpha_j \right) =
+  \left(\sigma_k\alpha_i\right)^t \left(\sigma_k \alpha_j\right) \]
+
+This gives us an alternative expression for the discriminant.
+
+\begin{prop}
+  For a separable extension $\ringExtension L K$ with basis $\iseqi\alpha n$,
+  \[ d(\iseqi \alpha n) = \det \left(\Tr \alpha_i\alpha_j \right). \]
+\end{prop}
+
+\begin{prop}
+  If $\ringExtension L K$ has a basis of the form
+  $\theta^0,\theta^1,\ldots,\theta^{n-1}$, one has 
+  
+  \[ d(\theta^0,\theta^1,\ldots,\theta^{n-1}) = \prod_{i<j} (\theta_i -
+  \theta_j)^2 \] 
+
+  \medskip\noindent
+  where $\theta_i = \sigma_i \theta$, with $\sigma_i$ ranging over $\kembk L$.
+\end{prop}
+
+\begin{proof}
+  \begin{align*}
+    \begin{vmatrix}
+      1      & \theta_1 & \theta_1^2 & \cdots & \theta_1^{n-1}\\
+      1      & \theta_2 & \theta_2^2 & \cdots & \theta_2^{n-1}\\
+      \vdots & \vdots   & \vdots     & \ddots & \vdots\\
+      1      & \theta_n & \theta_n^2 & \cdots & \theta_n^{n-1}
+    \end{vmatrix}
+    &=
+    \begin{vmatrix}
+      1      & 0                   & 0          & \cdots & 0 \\
+      1      & \theta_2 - \theta_1 & \theta_2(\theta_2 - \theta_1) 
+             & \cdots & \theta_2^{n-2}(\theta_2 - \theta_1)\\
+      \vdots & \vdots   & \vdots     & \ddots & \vdots\\
+      1      & \theta_n - \theta_1 & \theta_n(\theta_n - \theta_1) 
+             & \cdots & \theta_n^{n-2}(\theta_n - \theta_1)\\
+    \end{vmatrix}\\
+    &= 
+    \begin{vmatrix}
+      \theta_2 - \theta_1 & \theta_2(\theta_2 - \theta_1) &
+      \cdots & \theta_2^{n-2}(\theta_2 - \theta_1)\\
+      \vdots   & \vdots     & \ddots & \vdots\\
+      \theta_n - \theta_1 & \theta_n(\theta_n - \theta_1) &
+      \cdots & \theta_n^{n-2}(\theta_n - \theta_1)\\
+    \end{vmatrix}\\
+    &=
+    \begin{vmatrix}
+      1      & \theta_2 & \theta_2^2 & \cdots & \theta_2^{n-2}\\
+      1      & \theta_3 & \theta_3^2 & \cdots & \theta_3^{n-2}\\
+      \vdots & \vdots   & \vdots     & \ddots & \vdots\\
+      1      & \theta_n & \theta_n^2 & \cdots & \theta_n^{n-2}
+    \end{vmatrix} \cdot \prod_i (\theta_i - \theta_1)
+  \end{align*}
+  We recursively expand the new determinant to arrive at \[ \prod_j \prod_{i>j}
+  (\theta_i - \theta_j) = \prod_{1\le i<j\le n} (\theta_j - \theta_i)\]
+  which the reader may recognise as the Vandermonde determinant.
+\end{proof}
 
 \begin{prop}%
   \label{trace-form-bilinear}
